@@ -102,7 +102,7 @@ export default {
             return {
                 activity: {},
                 name: donnee.name,
-                /*excerpt: donnee.excerpt,
+                excerpt: donnee.excerpt,
                   description: donnee.description,
                   featuredImage: donnee.featuredImage,
                   location: donnee.location,
@@ -113,7 +113,7 @@ export default {
                   price: donnee.price,
                   city_id: donnee.city_id,
                   duration: donnee.duration,
-                  vehicleIsAvailable: donnee.vehicleIsAvailable*/
+                  vehicleIsAvailable: donnee.vehicleIsAvailable
             }
         } else {
             return {
@@ -206,7 +206,7 @@ export default {
              } else {
                  this.vehicleIsAvailable = false
              }*/
-            let new_activity = {
+            /*let new_activity = {
                 name: this.name,
                 excerpt: this.excerpt,
                 description: this.description,
@@ -220,8 +220,8 @@ export default {
                 city_id: this.city_id,
                 duration: this.duration,
                 vehicleIsAvailable: this.vehicleIsAvailable,
-            }
-            if ( /*this.name== ""
+            }*/
+           /* if ( this.name== ""
             ||this.excerpt== ""
             ||this.description== ""
             ||this.featuredImage== ""
@@ -233,7 +233,7 @@ export default {
             ||this.price== ""
             ||this.city_id== ""
             ||this.duration== ""
-            ||this.vehicleIsAvailable== ""*/ !new_activity) {
+            ||this.vehicleIsAvailable== "" !new_activity) {
                 Swal.fire({
                     title: 'erreur!',
                     text: 'Aucun champ ne doit être vide',
@@ -263,9 +263,10 @@ export default {
              this.price="",
              this.city_id="",
              this.duration="",
-             this.vehicleIsAvailable=""*/
-        }
+             this.vehicleIsAvailable=""
+        }*/
     }
+}
 }
 
 </script>

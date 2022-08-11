@@ -336,6 +336,7 @@
   </div>
 </template>
 
+<<<<<<< HEAD
 <script>
 import HeaderView from './HeaderView.vue';
 import NavbarView from './NavbarView.vue';
@@ -345,3 +346,14 @@ export default {
 }
 </script>
 
+=======
+
+
+<script>
+export default {
+  name: 'DashboardPage',
+  components: { HeaderView }
+}
+
+</script>
+>>>>>>> 47af66603282aa3d12b5be06aade29e7faf893e9

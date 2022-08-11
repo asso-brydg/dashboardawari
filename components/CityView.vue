@@ -110,7 +110,8 @@
                         </div>
 
                         <div class="flex flex-col">
-                            <div class="flex justify-between p-3 hover:bg-white rounded-xl hover:shadow hover:shadow-gray-400">
+                            <div
+                                class="flex justify-between p-3 hover:bg-white rounded-xl hover:shadow hover:shadow-gray-400">
                                 <div class="flex space-x-12">
                                     <span class="text-gray-800 text-sm ">1</span>
                                     <div class="h-6 w-6 rounded-full bg-white"></div>
@@ -123,7 +124,8 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between p-3 hover:bg-white rounded-xl hover:shadow hover:shadow-gray-400">
+                            <div
+                                class="flex justify-between p-3 hover:bg-white rounded-xl hover:shadow hover:shadow-gray-400">
                                 <div class="flex space-x-12">
                                     <span class="text-gray-800 text-sm ">2</span>
                                     <div class="h-6 w-6 rounded-full border border-gray-400 bg-white"></div>
@@ -142,7 +144,8 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between p-3 hover:bg-white rounded-xl hover:shadow hover:shadow-gray-400">
+                            <div
+                                class="flex justify-between p-3 hover:bg-white rounded-xl hover:shadow hover:shadow-gray-400">
                                 <div class="flex space-x-12">
                                     <span class="text-gray-800 text-sm ">3</span>
                                     <div class="h-6 w-6 rounded-full bg-white"></div>
@@ -156,7 +159,8 @@
                             </div>
 
 
-                            <div class="flex justify-between p-3 hover:bg-white rounded-xl hover:shadow hover:shadow-gray-400">
+                            <div
+                                class="flex justify-between p-3 hover:bg-white rounded-xl hover:shadow hover:shadow-gray-400">
                                 <div class="flex space-x-12">
                                     <span class="text-gray-800 text-sm ">4</span>
                                     <div class="h-6 w-6 rounded-full bg-white"></div>
@@ -181,6 +185,7 @@
         </div>
     </div>
 </template>
+<<<<<<< HEAD
 <script>
 import HeaderView from './HeaderView.vue';
 import NavbarView from './NavbarView.vue';
@@ -189,4 +194,12 @@ export default {
   components:{ HeaderView, navbarView, SearchBar, HeaderView, NavbarView }
 }
 
+=======
+
+<script>
+export default {
+    name: 'CityView',
+    components: { HeaderView, navbarView, SearchBar }
+}
+>>>>>>> 47af66603282aa3d12b5be06aade29e7faf893e9
 </script>

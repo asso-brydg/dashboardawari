@@ -85,11 +85,12 @@ export default {
         let id = this.$route.query["_id"]
         if (id) {
             axios.get(BASE_URL + '/activities/' + id).then((result) => {
-                //donnee = result.data
+                this.activity = result.data
                 console.log(result.data)
             }).catch((error) => {
                 console.log("some error occured", error);
             })
+            this.update_activity(id)
         }
     },
     data() {
@@ -101,19 +102,19 @@ export default {
         if (id) {
             return {
                 activity: {},
-                name: donnee.name,
-                excerpt: donnee.excerpt,
-                  description: donnee.description,
-                  featuredImage: donnee.featuredImage,
-                  location: donnee.location,
-                  gallery: donnee.gallery,
-                  tags: donnee.tags,
-                  departureDate: donnee.departureDate,
-                  meetingAdress: donnee.meetingAdress,
-                  price: donnee.price,
-                  city_id: donnee.city_id,
-                  duration: donnee.duration,
-                  vehicleIsAvailable: donnee.vehicleIsAvailable
+                name: "",
+               /* excerpt: donnee.excerpt,
+                description: donnee.description,
+                featuredImage: donnee.featuredImage,
+                location: donnee.location,
+                gallery: donnee.gallery,
+                tags: donnee.tags,
+                departureDate: donnee.departureDate,
+                meetingAdress: donnee.meetingAdress,
+                price: donnee.price,
+                city_id: donnee.city_id,
+                duration: donnee.duration,
+                vehicleIsAvailable: donnee.vehicleIsAvailable*/
             }
         } else {
             return {
@@ -201,6 +202,8 @@ export default {
              this.vehicleIsAvailable=""*/
         },
         update_activity() {
+            let datas = this.activity
+            this.name = datas.name
             /* if (this.vehicleIsAvailable == "oui") {
                  this.vehicleIsAvailable = true
              } else {

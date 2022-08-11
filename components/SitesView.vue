@@ -145,9 +145,10 @@
 <script>
 import HeaderView from './HeaderView.vue';
 import NavbarView from './NavbarView.vue';
+import SearchBar from './SearchBar.vue';
 export default {
   name: 'SitesView',
-  components:{ HeaderView, navbarView, SearchBar, HeaderView, NavbarView }
+  components:{ SearchBar, HeaderView, NavbarView, SearchBar }
 }
 
 </script>

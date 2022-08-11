@@ -336,9 +336,12 @@
   </div>
 </template>
 
-<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
 
+
+<script>
 export default {
   name: 'DashboardPage',
-  components:{HeaderView}
+  components: { HeaderView }
 }
+
+</script>

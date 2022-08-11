@@ -51,11 +51,11 @@
                     <span>Voyageurs</span>
                 </a>
                 <a href="#" class="flex space-x-4">
-                    <img src="../assets/icons/vectorguides.svg" alt="" class="iconsConfig" />
+                    <img src="../assets/icons/Vectorguides.svg" alt="" class="iconsConfig" />
                     <span>Hôtes</span>
                 </a>
                 <a href="#" class="flex space-x-4">
-                    <img src="../assets/icons/vectorguides.svg" alt="" class="iconsConfig" />
+                    <img src="../assets/icons/Vectorguides.svg" alt="" class="iconsConfig" />
                     <span>Guides</span>
                 </a>
             </div>
@@ -78,6 +78,9 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;500&display=swap');
 </style>
+
+<script>
 export default {
-  name: 'navbarView'
+    name: 'navbarView'
 }
+</script>

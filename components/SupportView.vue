@@ -144,7 +144,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import HeaderView from './HeaderView.vue';
 import NavbarView from './NavbarView.vue';
 export default {
@@ -159,4 +158,4 @@ export default {
     components: { HeaderView, navbarView, SearchBar }
 }
 </script>
->>>>>>> 47af66603282aa3d12b5be06aade29e7faf893e9
+

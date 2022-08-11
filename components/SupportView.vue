@@ -148,14 +148,8 @@ import HeaderView from './HeaderView.vue';
 import NavbarView from './NavbarView.vue';
 export default {
   name: 'SupportView',
-  components:{ HeaderView, navbarView, SearchBar, HeaderView, NavbarView }
+  components:{SearchBar, HeaderView, NavbarView }
 }
 </script>
 
-=======
-export default {
-    name: 'SupportView',
-    components: { HeaderView, navbarView, SearchBar }
-}
-</script>
 

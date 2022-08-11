@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import '../fonts';
+.iconsConfig{
+    height: 24px;
+    width: 24px;
+}
+.focus{
+    @apply
+    text-blue-600
+}
+
+.color-red-red{
+    font-size: 25px,
+    color: red,
+}
+
+.div{
+    font-family: 'Inter', sans-serif;
+}
+@font-face {
+    font-family: 'SoraReg';
+    font-weight: 700;
+    src: url('../fonts/soraFonts/Sora-Regular.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'interBold';
+  font-weight: 700;
+  src: url('../fonts/interFonts/Inter-ExtraBold.ttf') format('ttf');
+}
+
+/*@include font-face( interBolds, '~/assets/fonts/interFonts/Inter-ExtraBold.ttf', 600, medium, otf)*/

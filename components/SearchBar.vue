@@ -9,6 +9,9 @@
         <img src="../assets/icons/Vectorsearch.svg" alt="" height="20" width="20" class="self-end">
     </div>
 </template>
+<script>
 export default {
   name: 'SearchBar'
 }
+
+</script>

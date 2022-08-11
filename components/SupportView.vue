@@ -2,7 +2,7 @@
     <div class="flex flex-col p-6 bg-gray-50 ">
         <HeaderView />
         <div class="flex w-auto">
-            <navbarView />
+            <NavbarView />
             <div class="flex flex-col w-full">
                 <div class="w-3/5 flex flex-col">
                     <SearchBar />
@@ -121,7 +121,12 @@
     </div>
 </template>
 
+<script>
+import HeaderView from './HeaderView.vue';
+import NavbarView from './NavbarView.vue';
 export default {
   name: 'SupportView',
-  components:{HeaderView, navbarView, SearchBar}
+  components:{ HeaderView, navbarView, SearchBar, HeaderView, NavbarView }
 }
+</script>
+

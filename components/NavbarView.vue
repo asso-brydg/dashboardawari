@@ -75,9 +75,10 @@
     </div>
 </template>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;500&display=swap');
-</style>
+
+<script>
 export default {
   name: 'navbarView'
 }
+</script>
+

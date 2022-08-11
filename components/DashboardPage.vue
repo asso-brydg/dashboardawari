@@ -3,7 +3,7 @@
     <HeaderView />
     <i class="las la-search"></i>
     <div class="body flex text-gray-500 text-xs font-bold py-10 px-6">
-      <navbarView />
+      <NavbarView />
       <div class="cards flex flex-col h-auto w-4/5 space-y-4">
         <div class="top w-full flex space-x-4">
           <div class="planCard h-full w-2/3 bg-white rounded-xl flex flex-col p-3 space-y-5">
@@ -336,9 +336,12 @@
   </div>
 </template>
 
-<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
-
+<script>
+import HeaderView from './HeaderView.vue';
+import NavbarView from './NavbarView.vue';
 export default {
   name: 'DashboardPage',
-  components:{HeaderView}
+  components:{ HeaderView, HeaderView, NavbarView }
 }
+</script>
+

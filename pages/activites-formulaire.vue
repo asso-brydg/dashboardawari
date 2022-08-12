@@ -59,8 +59,11 @@
                     </div>
 
                 </div>
-                <button class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                <button v-if="id == null " class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
                     @click="add_new_activity">Enrégistrer</button>
+
+                <button v-if="id != null " class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                    @click="update_activity">Modifier l'expérience</button>
             </div>
         </div>
     </div>
@@ -80,55 +83,33 @@ export default {
     },
     mounted() {
         let id = this.$route.query["_id"]
+        this.id = id;
         if (id) {
             axios.get(BASE_URL + '/activities/' + id).then((result) => {
-                this.activity = result.data
-                console.log(this.activity)
+                this.name = result.data['name'];
+                console.log("logs ",result.data['name'])
             }).catch((error) => {
                 console.log("some error occured", error);
             })
-            this.update_activity(id)
+            
         }
     },
     data() {
-        let id = this.$route.query["_id"]
-        /*Je veux récupérer les données ici pour pouvoir les mettres dans les inputs */
-        let donnee = {
-            name: 'nom'
-        }
-        if (id) {
-            return {
-                activity: {},
-                name: "",
-               /* excerpt: donnee.excerpt,
-                description: donnee.description,
-                featuredImage: donnee.featuredImage,
-                location: donnee.location,
-                gallery: donnee.gallery,
-                tags: donnee.tags,
-                departureDate: donnee.departureDate,
-                meetingAdress: donnee.meetingAdress,
-                price: donnee.price,
-                city_id: donnee.city_id,
-                duration: donnee.duration,
-                vehicleIsAvailable: donnee.vehicleIsAvailable*/
-            }
-        } else {
-            return {
-                name: "",
-                excerpt: "",
-                description: "",
-                featuredImage: "",
-                location: "",
-                gallery: "",
-                tags: "",
-                departureDate: "",
-                meetingAdress: "",
-                price: "",
-                city_id: "",
-                duration: "",
-                vehicleIsAvailable: ""
-            }
+        return {
+            id: null,
+            name: "",
+            excerpt: "",
+            description: "",
+            featuredImage: "",
+            location: "",
+            gallery: "",
+            tags: "",
+            departureDate: "",
+            meetingAdress: "",
+            price: "",
+            city_id: "",
+            duration: "",
+            vehicleIsAvailable: ""
         }
     },
 
@@ -199,14 +180,9 @@ export default {
              this.vehicleIsAvailable=""*/
         },
         update_activity() {
-            let datas = this.activity
-            this.name = datas.name
-            /* if (this.vehicleIsAvailable == "oui") {
-                 this.vehicleIsAvailable = true
-             } else {
-                 this.vehicleIsAvailable = false
-             }*/
-            /*let new_activity = {
+            
+           
+            let updatedActivity = {
                 name: this.name,
                 excerpt: this.excerpt,
                 description: this.description,
@@ -220,53 +196,53 @@ export default {
                 city_id: this.city_id,
                 duration: this.duration,
                 vehicleIsAvailable: this.vehicleIsAvailable,
-            }*/
-           /* if ( this.name== ""
-            ||this.excerpt== ""
-            ||this.description== ""
-            ||this.featuredImage== ""
-            ||this.location== ""
-            ||this.gallery== ""
-            ||this.tags== ""
-            ||this.departureDate== ""
-            ||this.meetingAdress== ""
-            ||this.price== ""
-            ||this.city_id== ""
-            ||this.duration== ""
-            ||this.vehicleIsAvailable== "" !new_activity) {
-                Swal.fire({
-                    title: 'erreur!',
-                    text: 'Aucun champ ne doit être vide',
-                    icon: 'error',
-                    confirmButtonText: 'okay'
-                })
-            } else {
-                this.$store.commit("activities/ADD_ACTIVITY", new_activity);
-                Swal.fire({
-                    title: 'success!',
-                    text: 'Enrégistrement réussi',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                })
             }
-
-
-            /* this.name = "",
-             this.excerpt = "",
-             this.description = "",
-             this.featuredImage="",
-             this.location="",
-             this.gallery="",
-             this.tags="",
-             this.departureDate="",
-             this.meetingAdress="",
-             this.price="",
-             this.city_id="",
-             this.duration="",
-             this.vehicleIsAvailable=""
-        }*/
+            /* if ( this.name== ""
+             ||this.excerpt== ""
+             ||this.description== ""
+             ||this.featuredImage== ""
+             ||this.location== ""
+             ||this.gallery== ""
+             ||this.tags== ""
+             ||this.departureDate== ""
+             ||this.meetingAdress== ""
+             ||this.price== ""
+             ||this.city_id== ""
+             ||this.duration== ""
+             ||this.vehicleIsAvailable== "" !new_activity) {
+                 Swal.fire({
+                     title: 'erreur!',
+                     text: 'Aucun champ ne doit être vide',
+                     icon: 'error',
+                     confirmButtonText: 'okay'
+                 })
+             } else {
+                 this.$store.commit("activities/ADD_ACTIVITY", new_activity);
+                 Swal.fire({
+                     title: 'success!',
+                     text: 'Enrégistrement réussi',
+                     icon: 'success',
+                     confirmButtonText: 'Cool'
+                 })
+             }
+ 
+ 
+             /* this.name = "",
+              this.excerpt = "",
+              this.description = "",
+              this.featuredImage="",
+              this.location="",
+              this.gallery="",
+              this.tags="",
+              this.departureDate="",
+              this.meetingAdress="",
+              this.price="",
+              this.city_id="",
+              this.duration="",
+              this.vehicleIsAvailable=""
+         }*/
+        }
     }
-}
 }
 
 </script>

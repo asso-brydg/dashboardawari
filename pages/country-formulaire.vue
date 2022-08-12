@@ -82,8 +82,21 @@ export default {
                 featuredImage: this.featuredImage,
                 gallery: this.gallery,
             }
-            if (new_country) {
+             if (!new_country) {
+                Swal.fire({
+                    title: 'erreur!',
+                    text: 'Aucun champ ne doit être vide',
+                    icon: 'error',
+                    confirmButtonText: 'okay'
+                })
+            } else {
                 this.$store.commit("countries/ADD_COUNTRY", new_country);
+                Swal.fire({
+                    title: 'success!',
+                    text: 'Enrégistrement réussi',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
             }
 
             /* this.name = "",

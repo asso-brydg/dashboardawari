@@ -77,16 +77,13 @@ export default {
     name: 'activityForm',
     components: { HeaderView, NavbarView },
     computed: {
-        /*  activity() {
-              return this.$store.state.activities['oneActivity']
-          }*/
     },
     mounted() {
         let id = this.$route.query["_id"]
         if (id) {
             axios.get(BASE_URL + '/activities/' + id).then((result) => {
                 this.activity = result.data
-                console.log(result.data)
+                console.log(this.activity)
             }).catch((error) => {
                 console.log("some error occured", error);
             })

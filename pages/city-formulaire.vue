@@ -19,7 +19,7 @@
                             placeholder="Entrer la description de la ville"></textarea>
                     </div>
                     <div class="p-2 flex flex-col w-1/2 space-y-4">
-                          <input type="text" v-model="featuredImage"
+                        <input type="text" v-model="featuredImage"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer une images de mise en avant de la ville">
                         <input type="text" v-model="gallery"
@@ -61,13 +61,7 @@ export default {
             featuredImage: "",
             location: "",
             gallery: "",
-            tags: "",
-            departureDate: "",
-            meetingAdress: "",
-            price: "",
-            city_id: "",
-            duration: "",
-            vehicleIsAvailable: ""
+            country_id: "",
         }
     },
 
@@ -82,10 +76,23 @@ export default {
                 gallery: this.gallery,
                 country_id: this.country_id,
             }
-            if (new_city) {
-                this.$store.commit("cities/ADD_CITY", new_city);
-            }
 
+            if (!new_city) {
+                Swal.fire({
+                    title: 'erreur!',
+                    text: 'Aucun champ ne doit être vide',
+                    icon: 'error',
+                    confirmButtonText: 'okay'
+                })
+            } else {
+                this.$store.commit("cities/ADD_CITY", new_city);
+                Swal.fire({
+                    title: 'success!',
+                    text: 'Enrégistrement réussi',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
+            }
             /* this.name = "",
              this.excerpt = "",
              this.description = "",

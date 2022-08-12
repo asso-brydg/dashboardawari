@@ -5,7 +5,12 @@
             <NavbarView />
             <div
                 class="m-auto shadow shadow-gray-300 w-4/5 h-auto flex flex-col justify-center items-center p-6 space-y-4 rounded-xl">
-                <span class="text-gray-800 font-bold uppercase text-3xl">Enrégistrer une catégorie</span>
+                 <div class="w-full p-4 flex items-center justify-between">
+                    <span class="text-gray-800 font-bold uppercase text-3xl">Enrégistrer une catégorie</span>
+                    <NuxtLink to='/category-list' class="bg-blue-400 rounded-xl p-2 text-white font-bold">
+                        Liste des catégories
+                    </NuxtLink>
+                </div>
                 <div class="flex p-4 border border-gray-200 bg-white w-full h-auto space-x-4">
                     <div class="p-2 flex flex-col w-1/2 space-y-4">
                         <input v-model="name" type="text"
@@ -50,6 +55,7 @@
 <script>
 import HeaderView from '~/components/HeaderView.vue';
 import NavbarView from '~/components/NavbarView.vue';
+const Swal = require('sweetalert2')
 
 export default {
     name: 'categoryForm',
@@ -75,10 +81,22 @@ export default {
                 gallery: this.gallery,
                 tags: this.tags,
             }
-            if (new_category) {
-                this.$store.commit("categories/ADD_ACTIVITY", new_category);
+            if (!new_category) {
+                Swal.fire({
+                    title: 'erreur!',
+                    text: 'Aucun champ ne doit être vide',
+                    icon: 'error',
+                    confirmButtonText: 'okay'
+                })
+            } else {
+                this.$store.commit("categories/ADD_CATEGORY", new_category);
+                Swal.fire({
+                    title: 'success!',
+                    text: 'Enrégistrement réussi',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
             }
-
             /* this.name = "",
              this.excerpt = "",
              this.description = "",
@@ -86,7 +104,6 @@ export default {
              this.gallery="",
              this.tags="",
            */
-            //this.$alert("Enrégistrement réussi!!!");
         }
     }
 }

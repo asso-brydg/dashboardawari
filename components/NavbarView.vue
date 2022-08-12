@@ -73,7 +73,7 @@
             </div>
         </div>
         <div>
-            <NuxtLink to='/activites-list' class="flex space-x-4">
+            <NuxtLink to='/activities-list' class="flex space-x-4">
                 <img src="../assets/icons/Mail_solidinbox.svg" alt="" class="iconsConfig" />
                 <span>expériences</span>
             </NuxtLink>

@@ -5,35 +5,40 @@
             <NavbarView />
             <div
                 class="m-auto shadow shadow-gray-300 w-4/5 h-auto flex flex-col justify-center items-center p-6 space-y-4 rounded-xl">
-                <span class="text-gray-800 font-bold uppercase text-3xl">Enrégistrer une activité</span>
+                 <div class="w-full p-4 flex items-center justify-between">
+                <span class="text-gray-800 font-bold uppercase text-3xl">Enrégistrer un pays</span>
+                    <NuxtLink to='/country-list' class="bg-blue-400 rounded-xl p-2 text-white font-bold">
+                        Liste des pays
+                    </NuxtLink>
+                </div>
                 <div class="flex p-4 border border-gray-200 bg-white w-full h-auto space-x-4">
                     <div class="p-2 flex flex-col w-1/2 space-y-4">
                         <input v-model="code" type="text"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer le code de l'activité">
+                            placeholder="Entrer le code du pays">
                         <input v-model="name" type="text"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer le nom de l'activité">
+                            placeholder="Entrer le nom du pays">
 
                         <textarea name="" id="" cols="30" rows="10" v-model="description"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer la description de l'activité"></textarea>
+                            placeholder="Entrer la description du pays"></textarea>
 
                     </div>
                     <div class="p-2 flex flex-col w-1/2 space-y-4">
                         <input type="text" v-model="featuredImage"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer une images de mise en avant de l'activité">
+                            placeholder="Entrer une images de mise en avant du pays">
 
                         <input type="text" v-model="gallery"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer la gallerie de l'activité">
-                        <input v-model="phoneCode" type="text"
+                            placeholder="Entrer la gallerie du pays">
+                        <input v-model="phoneCode" type="number"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer le code téléphonique de l'activité">
+                            placeholder="Entrer le code téléphonique du pays">
                         <input type="text" v-model="excerpt"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer le résumé de l'activité">
+                            placeholder="Entrer le résumé du pays">
                     </div>
                 </div>
                 <button class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
@@ -55,9 +60,10 @@
 <script>
 import HeaderView from '~/components/HeaderView.vue';
 import NavbarView from '~/components/NavbarView.vue';
+const Swal = require('sweetalert2')
 
 export default {
-    name: 'activityForm',
+    name: 'countryForm',
     components: { HeaderView, NavbarView },
     data() {
         return {

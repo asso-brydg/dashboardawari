@@ -11,7 +11,7 @@ Vue.use(VueSimpleAlert)*/
 export const state = () => ({
     new_country: {},
     countries: [],
-    oneCategory:{},
+    oneCountry:{},
     _id:""
 });
 

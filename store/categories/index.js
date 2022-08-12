@@ -2,10 +2,7 @@ import axios from "axios"
 const BASE_URL = url;
 import { url } from "../url";
 /*import VueSimpleAlert from "vue-simple-alert";
-
 Vue.use(VueSimpleAlert)*/
-
-
 
 
 export const state = () => ({
@@ -16,12 +13,9 @@ export const state = () => ({
 });
 
 
-
-
-
 export const mutations =  ({
     SET_NEW_CATEGORY(state, category){
-        state.new_activity = category 
+        state.new_category = category 
     },
     SET_CATEGORIES(state, categories){
         state.categories = categories
@@ -33,7 +27,7 @@ export const mutations =  ({
         state._id =_id
     },
     SET_UPDATE_CATEGORY(state, category){
-        state.new_activity = category 
+        state.new_category = category 
     },
     ADD_CATEGORY(state, category){
         console.log(category);

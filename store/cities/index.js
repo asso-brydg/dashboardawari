@@ -27,7 +27,7 @@ export const mutations =  ({
         state.cities = cities
     },
     SET_ONE_CITY(state, city){
-        state.oneCategory = city
+        state.oneCity = city
     },
     SET_DELETE_CITY(state,_id){
         state._id =_id
@@ -73,7 +73,7 @@ export const actions =({
              commit("SET_DELETE_CITY",request._id)
              axios.get(BASE_URL + "/cities/index").then((result) => {
                 //console.log("getting cities", result.data)
-                commit("SET_cities", result.data);
+                commit("SET_CITIES", result.data);
             }).catch((error)=>{
                 console.log("some error occured", error);
             })

@@ -79,7 +79,7 @@
             </NuxtLink>
         </div>
         <div>
-            <NuxtLink to='/activites-list' class="flex space-x-4">
+            <NuxtLink to='/activities-list' class="flex space-x-4">
                 <img src="../assets/icons/emoji_solidnotifications.svg" alt="" class="iconsConfig" />
                 <span>activité</span>
             </NuxtLink>

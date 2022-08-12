@@ -37,7 +37,7 @@
                 </NuxtLink>-->
                 <button class="w-full p-3 text-3xl text-center text-gray-100 uppercase bg-blue-500 hover:bg-blue-400"
                     @click="Add_city()">
-                    ajouter une nouvelle activité
+                    ajouter une nouvelle ville
                 </button>
             </div>
         </div>
@@ -64,7 +64,7 @@ export default {
     methods: {
         confirmer(city_id) {
             Swal.fire({
-                title: 'Etes vous sûre de supprimer cette activité?',
+                title: 'Etes vous sûre de supprimer cette ville?',
                 text: "Cette action est irrévocable!",
                 icon: 'warning',
                 showCancelButton: true,

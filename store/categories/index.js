@@ -1,12 +1,12 @@
 import axios from "axios"
 const BASE_URL = url;
 import { url } from "../url";
-/*import VueSimpleAlert from "vue-simple-alert";
-Vue.use(VueSimpleAlert)*/
+
 
 
 export const state = () => ({
     new_category: {},
+    update_category:{},
     categories: [],
     oneCategory:{},
     _id:""
@@ -39,7 +39,15 @@ export const mutations =  ({
             console.log("il y a une erreur", error);
         })
     },
-
+    PUT_CATEGORY(state, category){
+        console.log(category);
+        state.new_activity = category;
+        axios.put(BASE_URL + "/categories/update/"+category.id, category).then((result) => {
+            console.log(result.data)
+        }).catch((error)=> {
+            console.log("il y a une erreur", error);
+        })
+    },
 })
 
 export const actions =({
@@ -55,6 +63,7 @@ export const actions =({
     },
     GET_ONE_CATEGORY({commit},_id){
         axios.get(BASE_URL + '/categories/'+_id).then((result) => {
+            console.log(_id)
             commit("SET_ONE_CATEGORY", result.data);
         }).catch((error)=>{
             console.log("some error occured", error);
@@ -77,13 +86,5 @@ export const actions =({
              })
         }
     },
-    PUT_CATEGORY(state, category,_id){
-        console.log(category);
-        state.new_activity = category;
-        axios.put(BASE_URL + "/categories/update/"+_id, category).then((result) => {
-            console.log(result.data)
-        }).catch((error)=> {
-            console.log("il y a une erreur", error);
-        })
-    },
+   
 })

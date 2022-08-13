@@ -1,22 +1,15 @@
 import axios from "axios"
 const BASE_URL = url;
 import { url } from "../url";
-/*import VueSimpleAlert from "vue-simple-alert";
-
-Vue.use(VueSimpleAlert)*/
-
-
 
 
 export const state = () => ({
     new_country: {},
+    update_country:{},
     countries: [],
     oneCountry:{},
     _id:""
 });
-
-
-
 
 
 export const mutations =  ({

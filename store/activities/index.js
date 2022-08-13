@@ -1,22 +1,15 @@
 import axios from "axios"
 const BASE_URL = url;
 import { url } from "../url";
-/*import VueSimpleAlert from "vue-simple-alert";
-
-Vue.use(VueSimpleAlert)*/
-
-
 
 
 export const state = () => ({
     new_activity: {},
+    update_activity:{},
     activities: [],
     oneActivity:{},
     _id:""
 });
-
-
-
 
 
 export const mutations =  ({
@@ -41,6 +34,16 @@ export const mutations =  ({
         //Appel d'axiox pour en créer la donnée 
         axios.post(BASE_URL + "/activities", activity).then((result) => {
             //console.log(result.data)
+        }).catch((error)=> {
+            console.log("il y a une erreur", error);
+        })
+    },
+    PUT_ACTIVITY(state, activity){
+        console.log(activity);
+        state.update_activity = activity;
+        axios.put(BASE_URL + "/activities/update/"+activity.id, activity).then((result) => {
+            console.log(activity.id)
+            console.log(result.data)
         }).catch((error)=> {
             console.log("il y a une erreur", error);
         })
@@ -82,13 +85,5 @@ export const actions =({
              })
         }
     },
-    PUT_ACTIVITY(state, activity,_id){
-        console.log(activity);
-        state.new_activity = activity;
-        axios.put(BASE_URL + "/activities/update/"+_id, activity).then((result) => {
-            console.log(result.data)
-        }).catch((error)=> {
-            console.log("il y a une erreur", error);
-        })
-    },
+   
 })

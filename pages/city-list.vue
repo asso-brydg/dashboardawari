@@ -11,17 +11,13 @@
                         <tr class="bg-blue-400 border-b border-gray-400">
                             <th>#</th>
                             <th>Nom</th>
-                            <th>Cité</th>
-                            <th>Prix</th>
-                            <th>Durée</th>
+                            <th>Pays</th>
                             <th>Actions</th>
                         </tr>
                         <tr v-for="city in cities" :key="city['_id']" class="p-4">
                             <td class="py-4 text-center">{{ city['_id'] }}</td>
-                            <td class="py-4 text-center">Charles</td>
-                            <td class="py-4 text-center">Lomé</td>
-                            <td class="py-4 text-center">250 </td>
-                            <td class="py-4 text-center">20 min</td>
+                            <td class="py-4 text-center">{{ city['name'] }}</td>
+                            <td class="py-4 text-center">{{ city['country_id'] }}</td>
                             <td class="flex items-center justify-center py-4 space-x-3 text-center">
                                 <button class="p-2 font-bold text-white bg-red-400 rounded-xl hover:bg-red-500"
                                     @click="confirmer(city['_id'])">Supprimer</button>
@@ -31,10 +27,6 @@
                         </tr>
                     </table>
                 </div>
-                <!-- <NuxtLink to="/activites-formulaire"
-                    class="w-full p-3 text-3xl text-center text-gray-100 uppercase bg-blue-500 hover:bg-blue-400">
-                    ajouter une nouvelle activité
-                </NuxtLink>-->
                 <button class="w-full p-3 text-3xl text-center text-gray-100 uppercase bg-blue-500 hover:bg-blue-400"
                     @click="Add_city()">
                     ajouter une nouvelle ville

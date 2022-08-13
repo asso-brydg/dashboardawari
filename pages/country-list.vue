@@ -11,17 +11,15 @@
                         <tr class="bg-blue-400 border-b border-gray-400">
                             <th>#</th>
                             <th>Nom</th>
-                            <th>Cité</th>
-                            <th>Prix</th>
-                            <th>Durée</th>
+                            <th>Code</th>
+                            <th>Phone code</th>
                             <th>Actions</th>
                         </tr>
                         <tr v-for="country in countries" :key="country['_id']" class="p-4">
                             <td class="py-4 text-center">{{ country['_id'] }}</td>
-                            <td class="py-4 text-center">Charles</td>
-                            <td class="py-4 text-center">Lomé</td>
-                            <td class="py-4 text-center">250 </td>
-                            <td class="py-4 text-center">20 min</td>
+                            <td class="py-4 text-center">{{ country['name'] }}</td>
+                            <td class="py-4 text-center">{{ country['code'] }}</td>
+                            <td class="py-4 text-center">{{ country['phoneCode'] }} </td>
                             <td class="flex items-center justify-center py-4 space-x-3 text-center">
                                 <button class="p-2 font-bold text-white bg-red-400 rounded-xl hover:bg-red-500"
                                     @click="confirmer(country['_id'])">Supprimer</button>

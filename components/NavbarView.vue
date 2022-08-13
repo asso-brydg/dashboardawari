@@ -24,7 +24,7 @@
             </div>
         </div>
         <div>
-            <NuxtLink to='/city-formulaire' class="flex space-x-4">
+            <NuxtLink to='/city-list' class="flex space-x-4">
                 <img  src="../assets/icons/Switch_solidfinances.svg" alt="" class="iconsConfig" />
                 <span>villes</span>
             </NuxtLink>
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div>
-            <NuxtLink to='/activities-list' class="flex space-x-4">
+            <NuxtLink to='/experience-list' class="flex space-x-4">
                 <img src="../assets/icons/Mail_solidinbox.svg" alt="" class="iconsConfig" />
                 <span>expériences</span>
             </NuxtLink>

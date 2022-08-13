@@ -1,22 +1,15 @@
 import axios from "axios"
 const BASE_URL = url;
 import { url } from "../url";
-/*import VueSimpleAlert from "vue-simple-alert";
-
-Vue.use(VueSimpleAlert)*/
-
-
 
 
 export const state = () => ({
     new_city: {},
+    update_city:{},
     cities: [],
     oneCity:{},
     _id:""
 });
-
-
-
 
 
 export const mutations =  ({
@@ -40,6 +33,15 @@ export const mutations =  ({
         state.new_city = city;
         //Appel d'axiox pour en créer la donnée 
         axios.post(BASE_URL + "/cities", city).then((result) => {
+            console.log(result.data)
+        }).catch((error)=> {
+            console.log("il y a une erreur", error);
+        })
+    },
+    PUT_CITY(state, city){
+        console.log(city);
+        state.new_city = city;
+        axios.put(BASE_URL + "/cities/update/"+city.id, city).then((result) => {
             console.log(result.data)
         }).catch((error)=> {
             console.log("il y a une erreur", error);
@@ -82,13 +84,5 @@ export const actions =({
              })
         }
     },
-    PUT_CITY(state, city,_id){
-        console.log(city);
-        state.new_city = city;
-        axios.put(BASE_URL + "/cities/update/"+_id, city).then((result) => {
-            console.log(result.data)
-        }).catch((error)=> {
-            console.log("il y a une erreur", error);
-        })
-    },
+   
 })

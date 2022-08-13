@@ -35,18 +35,13 @@
                             placeholder="Entrer le pays de la ville">
                     </div>
                 </div>
-                <button class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                <button v-if="id == null" class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
                     @click="add_new_city">Enrégistrer</button>
+              
+                <button v-if="id != null"
+                    class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                    @click="update_city">Modifier la ville</button>
             </div>
-
-            <!--  <div>
-                <ul>
-                    <li v-for="item in items" :key=item>
-                    {{ item }}
-                   
-                    </li>
-                </ul>
-            </div>-->
         </div>
     </div>
 </template>
@@ -55,12 +50,33 @@
 import HeaderView from '~/components/HeaderView.vue';
 import NavbarView from '~/components/NavbarView.vue';
 const Swal = require('sweetalert2')
-
+import axios from "axios"
+const BASE_URL = url;
+import { url } from "./url";
 export default {
     name: 'cityForm',
     components: { HeaderView, NavbarView },
+     mounted() {
+        let id = this.$route.query["_id"]
+        this.id = id;
+        if (id) {
+            axios.get(BASE_URL + '/cities/' + id).then((result) => {
+                this.name = result.data['name'];
+                this.excerpt = result.data['excerpt'];
+                this.description = result.data['description'];
+                this.featuredImage = result.data['featuredImage'];
+                this.gallery = result.data['gallery'];
+                this.country_id = result.data['country_id'];
+                //console.log("logs ", result.data['name'])
+            }).catch((error) => {
+                console.log("some error occured", error);
+            })
+
+        }
+    },
     data() {
         return {
+            id: null,
             name: "",
             excerpt: "",
             description: "",
@@ -113,6 +129,62 @@ export default {
              this.duration="",
              this.vehicleIsAvailable=""*/
             //this.$alert("Enrégistrement réussi!!!");
+        },
+         update_city() {
+            let updatedCity = {
+                id: this.id,
+                name: this.name,
+                excerpt: this.excerpt,
+                description: this.description,
+                featuredImage: this.featuredImage,
+                gallery: this.gallery,
+                country: this.country,
+            }
+             if ( /*this.name== ""
+             ||this.excerpt== ""
+             ||this.description== ""
+             ||this.featuredImage== ""
+             ||this.location== ""
+             ||this.gallery== ""
+             ||this.tags== ""
+             ||this.departureDate== ""
+             ||this.meetingAdress== ""
+             ||this.price== ""
+             ||this.city_id== ""
+             ||this.duration== ""
+             ||this.vehicleIsAvailable== "" */!updatedCity) {
+                 Swal.fire({
+                     title: 'erreur!',
+                     text: 'Aucun champ ne doit être vide',
+                     icon: 'error',
+                     confirmButtonText: 'okay'
+                 })
+             } else {
+                 this.$store.commit("cities/PUT_CITY", updatedCity, updatedCity.id);
+                 console.log(updatedCity.id)
+                 Swal.fire({
+                     title: 'success!',
+                     text: 'modification réussi',
+                     icon: 'success',
+                     confirmButtonText: 'Cool'
+                 })
+             }
+ 
+ 
+             /* this.name = "",
+              this.excerpt = "",
+              this.description = "",
+              this.featuredImage="",
+              this.location="",
+              this.gallery="",
+              this.tags="",
+              this.departureDate="",
+              this.meetingAdress="",
+              this.price="",
+              this.city_id="",
+              this.duration="",
+              this.vehicleIsAvailable=""
+         }*/
         }
     }
 }

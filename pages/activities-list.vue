@@ -11,17 +11,15 @@
                         <tr class="bg-blue-400 border-b border-gray-400">
                             <th>#</th>
                             <th>Nom</th>
-                            <th>Cité</th>
                             <th>Prix</th>
                             <th>Durée</th>
                             <th>Actions</th>
                         </tr>
                         <tr v-for="activity in activities" :key="activity['_id']" class="p-4">
                             <td class="py-4 text-center">{{ activity['_id'] }}</td>
-                            <td class="py-4 text-center">Charles</td>
-                            <td class="py-4 text-center">Lomé</td>
-                            <td class="py-4 text-center">250 </td>
-                            <td class="py-4 text-center">20 min</td>
+                            <td class="py-4 text-center">{{ activity['name'] }}</td>
+                            <td class="py-4 text-center">{{ activity['price'] }} </td>
+                            <td class="py-4 text-center">{{ activity['duration'] }}</td>
                             <td class="flex items-center justify-center py-4 space-x-3 text-center">
                                 <button class="p-2 font-bold text-white bg-red-400 rounded-xl hover:bg-red-500"
                                     @click="confirmer(activity['_id'])">Supprimer</button>

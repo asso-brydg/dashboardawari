@@ -59,11 +59,13 @@
                     </div>
 
                 </div>
-                <button v-if="id == null " class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                <button v-if="id == null"
+                    class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
                     @click="add_new_activity">Enrégistrer</button>
 
-                <button v-if="id != null " class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
-                    @click="update_activity">Modifier l'expérience</button>
+                <button v-if="id != null"
+                    class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                    @click="update_activity">Modifier l'activité</button>
             </div>
         </div>
     </div>
@@ -87,11 +89,23 @@ export default {
         if (id) {
             axios.get(BASE_URL + '/activities/' + id).then((result) => {
                 this.name = result.data['name'];
-                console.log("logs ",result.data['name'])
+                this.excerpt = result.data['excerpt'];
+                this.description = result.data['description'];
+                this.featuredImage = result.data['featuredImage'];
+                this.location = result.data['location'];
+                this.gallery = result.data['gallery'];
+                this.tags = result.data['tags'];
+                this.departureDate = result.data['departureDate'];
+                this.meetingAdress = result.data['meetingAdress'];
+                this.price = result.data['price'];
+                this.city_id = result.data['city_id'];
+                this.duration = result.data['duration'];
+                this.vehicleIsAvailable = result.data['vehicleIsAvailable'];
+                //console.log("logs ", result.data['name'])
             }).catch((error) => {
                 console.log("some error occured", error);
             })
-            
+
         }
     },
     data() {
@@ -180,9 +194,8 @@ export default {
              this.vehicleIsAvailable=""*/
         },
         update_activity() {
-            
-           
             let updatedActivity = {
+                id: this.id,
                 name: this.name,
                 excerpt: this.excerpt,
                 description: this.description,
@@ -197,7 +210,7 @@ export default {
                 duration: this.duration,
                 vehicleIsAvailable: this.vehicleIsAvailable,
             }
-            /* if ( this.name== ""
+             if ( /*this.name== ""
              ||this.excerpt== ""
              ||this.description== ""
              ||this.featuredImage== ""
@@ -209,7 +222,7 @@ export default {
              ||this.price== ""
              ||this.city_id== ""
              ||this.duration== ""
-             ||this.vehicleIsAvailable== "" !new_activity) {
+             ||this.vehicleIsAvailable== "" */!updatedActivity) {
                  Swal.fire({
                      title: 'erreur!',
                      text: 'Aucun champ ne doit être vide',
@@ -217,10 +230,11 @@ export default {
                      confirmButtonText: 'okay'
                  })
              } else {
-                 this.$store.commit("activities/ADD_ACTIVITY", new_activity);
+                 this.$store.commit("activities/PUT_ACTIVITY", updatedActivity, updatedActivity.id);
+                 console.log(updatedActivity.id)
                  Swal.fire({
                      title: 'success!',
-                     text: 'Enrégistrement réussi',
+                     text: 'modification réussi',
                      icon: 'success',
                      confirmButtonText: 'Cool'
                  })

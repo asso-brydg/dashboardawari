@@ -5,8 +5,8 @@
             <NavbarView />
             <div
                 class="m-auto shadow shadow-gray-300 w-4/5 h-auto flex flex-col justify-center items-center p-6 space-y-4 rounded-xl">
-                 <div class="w-full p-4 flex items-center justify-between">
-                <span class="text-gray-800 font-bold uppercase text-3xl">Enrégistrer un pays</span>
+                <div class="w-full p-4 flex items-center justify-between">
+                    <span class="text-gray-800 font-bold uppercase text-3xl">Enrégistrer un pays</span>
                     <NuxtLink to='/country-list' class="bg-blue-400 rounded-xl p-2 text-white font-bold">
                         Liste des pays
                     </NuxtLink>
@@ -41,18 +41,13 @@
                             placeholder="Entrer le résumé du pays">
                     </div>
                 </div>
-                <button class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                <button v-if="id == null" class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
                     @click="add_new_country">Enrégistrer</button>
-            </div>
 
-            <!--  <div>
-                <ul>
-                    <li v-for="item in items" :key=item>
-                    {{ item }}
-                   
-                    </li>
-                </ul>
-            </div>-->
+                <button v-if="id != null"
+                    class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                    @click="update_country">Modifier le pays</button>
+            </div>
         </div>
     </div>
 </template>
@@ -61,12 +56,34 @@
 import HeaderView from '~/components/HeaderView.vue';
 import NavbarView from '~/components/NavbarView.vue';
 const Swal = require('sweetalert2')
-
+import axios from "axios"
+const BASE_URL = url;
+import { url } from "./url";
 export default {
     name: 'countryForm',
     components: { HeaderView, NavbarView },
+     mounted() {
+        let id = this.$route.query["_id"]
+        this.id = id;
+        if (id) {
+            axios.get(BASE_URL + '/countries/' + id).then((result) => {
+                this.name = result.data['name'];
+                this.code = result.data['code'];
+                this.phoneCode = result.data['phoneCode'];
+                 this.excerpt = result.data['excerpt'];
+                this.description = result.data['description'];
+                this.featuredImage = result.data['featuredImage'];
+                this.gallery = result.data['gallery'];
+                //console.log("logs ", result.data['name'])
+            }).catch((error) => {
+                console.log("some error occured", error);
+            })
+
+        }
+    },
     data() {
         return {
+            id:null,
             code: "",
             name: "",
             phoneCode: "",
@@ -88,7 +105,7 @@ export default {
                 featuredImage: this.featuredImage,
                 gallery: this.gallery,
             }
-             if (!new_country) {
+            if (!new_country) {
                 Swal.fire({
                     title: 'erreur!',
                     text: 'Aucun champ ne doit être vide',
@@ -119,6 +136,63 @@ export default {
              this.duration="",
              this.vehicleIsAvailable=""*/
             //this.$alert("Enrégistrement réussi!!!");
+        },
+          update_country() {
+            let updatedCountry = {
+                id: this.id,
+                name: this.name,
+                excerpt: this.excerpt,
+                description: this.description,
+                featuredImage: this.featuredImage,
+                code: this.code,
+                gallery: this.gallery,
+                phoneCode: this.phoneCode,
+            }
+             if ( /*this.name== ""
+             ||this.excerpt== ""
+             ||this.description== ""
+             ||this.featuredImage== ""
+             ||this.location== ""
+             ||this.gallery== ""
+             ||this.tags== ""
+             ||this.departureDate== ""
+             ||this.meetingAdress== ""
+             ||this.price== ""
+             ||this.city_id== ""
+             ||this.duration== ""
+             ||this.vehicleIsAvailable== "" */!updatedCountry) {
+                 Swal.fire({
+                     title: 'erreur!',
+                     text: 'Aucun champ ne doit être vide',
+                     icon: 'error',
+                     confirmButtonText: 'okay'
+                 })
+             } else {
+                 this.$store.commit("countries/PUT_COUNTRY", updatedCountry, updatedCountry.id);
+                 console.log(updatedCountry.id)
+                 Swal.fire({
+                     title: 'success!',
+                     text: 'modification réussi',
+                     icon: 'success',
+                     confirmButtonText: 'Cool'
+                 })
+             }
+ 
+ 
+             /* this.name = "",
+              this.excerpt = "",
+              this.description = "",
+              this.featuredImage="",
+              this.location="",
+              this.gallery="",
+              this.tags="",
+              this.departureDate="",
+              this.meetingAdress="",
+              this.price="",
+              this.city_id="",
+              this.duration="",
+              this.vehicleIsAvailable=""
+         }*/
         }
     }
 }

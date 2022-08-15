@@ -38,7 +38,15 @@ export const mutations =  ({
             console.log("il y a une erreur", error);
         })
     },
-
+    PUT_COUNTRY(state, country){
+        console.log(country);
+        state.new_country = country;
+        axios.put(BASE_URL + "/countries/update/"+country.id, country).then((result) => {
+            console.log(result.data)
+        }).catch((error)=> {
+            console.log("il y a une erreur", error);
+        })
+    },
 })
 
 export const actions =({
@@ -75,14 +83,5 @@ export const actions =({
                 console.log("some error occured", error);
              })
         }
-    },
-    PUT_COUNTRY(state, country,_id){
-        console.log(country);
-        state.new_country = country;
-        axios.put(BASE_URL + "/countries/update/"+_id, country).then((result) => {
-            console.log(result.data)
-        }).catch((error)=> {
-            console.log("il y a une erreur", error);
-        })
     },
 })

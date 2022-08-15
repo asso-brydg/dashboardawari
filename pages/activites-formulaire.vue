@@ -46,10 +46,12 @@
                         <input type="number"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer le prix de l'activité" v-model="price">
-                        <input type="text" v-model="city_id"
-                            class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer la ville de l'activité">
-
+                        <select name="" id="" v-model="city_id">
+                            <option v-for="city in cities" :key="city" :value="city['_id']">{{
+                                    city["name"]
+                            }}
+                            </option>
+                        </select>
                         <input type="number" v-model="duration"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la durée de l'activité (en jours)">
@@ -82,8 +84,12 @@ export default {
     name: 'activityForm',
     components: { HeaderView, NavbarView },
     computed: {
+        cities() {
+            return this.$store.state.cities['cities'];
+        },
     },
     mounted() {
+        this.$store.dispatch("cities/GET_CITIES");
         let id = this.$route.query["_id"]
         this.id = id;
         if (id) {
@@ -149,6 +155,7 @@ export default {
                 duration: this.duration,
                 vehicleIsAvailable: this.vehicleIsAvailable,
             }
+            console.log(this.country_id)
             if ( /*this.name== ""
             ||this.excerpt== ""
             ||this.description== ""
@@ -210,7 +217,7 @@ export default {
                 duration: this.duration,
                 vehicleIsAvailable: this.vehicleIsAvailable,
             }
-             if ( /*this.name== ""
+            if ( /*this.name== ""
              ||this.excerpt== ""
              ||this.description== ""
              ||this.featuredImage== ""
@@ -223,38 +230,38 @@ export default {
              ||this.city_id== ""
              ||this.duration== ""
              ||this.vehicleIsAvailable== "" */!updatedActivity) {
-                 Swal.fire({
-                     title: 'erreur!',
-                     text: 'Aucun champ ne doit être vide',
-                     icon: 'error',
-                     confirmButtonText: 'okay'
-                 })
-             } else {
-                 this.$store.commit("activities/PUT_ACTIVITY", updatedActivity, updatedActivity.id);
-                 console.log(updatedActivity.id)
-                 Swal.fire({
-                     title: 'success!',
-                     text: 'modification réussi',
-                     icon: 'success',
-                     confirmButtonText: 'Cool'
-                 })
-             }
- 
- 
-             /* this.name = "",
-              this.excerpt = "",
-              this.description = "",
-              this.featuredImage="",
-              this.location="",
-              this.gallery="",
-              this.tags="",
-              this.departureDate="",
-              this.meetingAdress="",
-              this.price="",
-              this.city_id="",
-              this.duration="",
-              this.vehicleIsAvailable=""
-         }*/
+                Swal.fire({
+                    title: 'erreur!',
+                    text: 'Aucun champ ne doit être vide',
+                    icon: 'error',
+                    confirmButtonText: 'okay'
+                })
+            } else {
+                this.$store.commit("activities/PUT_ACTIVITY", updatedActivity, updatedActivity.id);
+                console.log(updatedActivity.id)
+                Swal.fire({
+                    title: 'success!',
+                    text: 'modification réussi',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
+            }
+
+
+            /* this.name = "",
+             this.excerpt = "",
+             this.description = "",
+             this.featuredImage="",
+             this.location="",
+             this.gallery="",
+             this.tags="",
+             this.departureDate="",
+             this.meetingAdress="",
+             this.price="",
+             this.city_id="",
+             this.duration="",
+             this.vehicleIsAvailable=""
+        }*/
         }
     }
 }

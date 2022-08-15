@@ -30,14 +30,19 @@
                         <input type="text" v-model="gallery"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la gallerie de la ville">
-                        <input type="text" v-model="country_id"
+                        <select name="" id="" v-model="country_id">
+                            <option v-for="country in countries" :key="country" :value="country['_id']">{{ country["name"] }}
+                            </option>
+                        </select>
+                       <!-- <input type="text"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer le pays de la ville">
+                            placeholder="Entrer le pays de la ville">-->
                     </div>
                 </div>
-                <button v-if="id == null" class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                <button v-if="id == null"
+                    class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
                     @click="add_new_city">Enrégistrer</button>
-              
+
                 <button v-if="id != null"
                     class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
                     @click="update_city">Modifier la ville</button>
@@ -56,7 +61,13 @@ import { url } from "./url";
 export default {
     name: 'cityForm',
     components: { HeaderView, NavbarView },
-     mounted() {
+    computed: {
+        countries() {
+            return this.$store.state.countries['countries'];
+        },
+    },
+    mounted() {
+        this.$store.dispatch("countries/GET_COUNTRIES");
         let id = this.$route.query["_id"]
         this.id = id;
         if (id) {
@@ -98,6 +109,7 @@ export default {
                 gallery: this.gallery,
                 country_id: this.country_id,
             }
+            console.log(this.country_id)
 
             if (!new_city) {
                 Swal.fire({
@@ -130,7 +142,7 @@ export default {
              this.vehicleIsAvailable=""*/
             //this.$alert("Enrégistrement réussi!!!");
         },
-         update_city() {
+        update_city() {
             let updatedCity = {
                 id: this.id,
                 name: this.name,
@@ -140,7 +152,7 @@ export default {
                 gallery: this.gallery,
                 country: this.country,
             }
-             if ( /*this.name== ""
+            if ( /*this.name== ""
              ||this.excerpt== ""
              ||this.description== ""
              ||this.featuredImage== ""
@@ -153,38 +165,38 @@ export default {
              ||this.city_id== ""
              ||this.duration== ""
              ||this.vehicleIsAvailable== "" */!updatedCity) {
-                 Swal.fire({
-                     title: 'erreur!',
-                     text: 'Aucun champ ne doit être vide',
-                     icon: 'error',
-                     confirmButtonText: 'okay'
-                 })
-             } else {
-                 this.$store.commit("cities/PUT_CITY", updatedCity, updatedCity.id);
-                 console.log(updatedCity.id)
-                 Swal.fire({
-                     title: 'success!',
-                     text: 'modification réussi',
-                     icon: 'success',
-                     confirmButtonText: 'Cool'
-                 })
-             }
- 
- 
-             /* this.name = "",
-              this.excerpt = "",
-              this.description = "",
-              this.featuredImage="",
-              this.location="",
-              this.gallery="",
-              this.tags="",
-              this.departureDate="",
-              this.meetingAdress="",
-              this.price="",
-              this.city_id="",
-              this.duration="",
-              this.vehicleIsAvailable=""
-         }*/
+                Swal.fire({
+                    title: 'erreur!',
+                    text: 'Aucun champ ne doit être vide',
+                    icon: 'error',
+                    confirmButtonText: 'okay'
+                })
+            } else {
+                this.$store.commit("cities/PUT_CITY", updatedCity, updatedCity.id);
+                console.log(this.country)
+                Swal.fire({
+                    title: 'success!',
+                    text: 'modification réussi',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
+            }
+
+
+            /* this.name = "",
+             this.excerpt = "",
+             this.description = "",
+             this.featuredImage="",
+             this.location="",
+             this.gallery="",
+             this.tags="",
+             this.departureDate="",
+             this.meetingAdress="",
+             this.price="",
+             this.city_id="",
+             this.duration="",
+             this.vehicleIsAvailable=""
+        }*/
         }
     }
 }

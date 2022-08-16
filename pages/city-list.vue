@@ -17,7 +17,7 @@
                         <tr v-for="city in cities" :key="city['_id']" class="p-4">
                             <td class="py-4 text-center">{{ city['_id'] }}</td>
                             <td class="py-4 text-center">{{ city['name'] }}</td>
-                            <td class="py-4 text-center">{{ city['country_id'] }}</td>
+                            <td class="py-4 text-center">{{ city['name'] }}</td>
                             <td class="flex items-center justify-center py-4 space-x-3 text-center">
                                 <button class="p-2 font-bold text-white bg-red-400 rounded-xl hover:bg-red-500"
                                     @click="confirmer(city['_id'])">Supprimer</button>
@@ -39,7 +39,9 @@
 import HeaderView from '~/components/HeaderView.vue'
 import NavbarView from '~/components/NavbarView.vue'
 const Swal = require('sweetalert2')
-
+import axios from "axios"
+const BASE_URL = url;
+import { url } from "./url";
 export default {
     name: 'cityForm',
     components: { HeaderView, NavbarView },
@@ -47,6 +49,9 @@ export default {
         cities() {
             return this.$store.state.cities['cities'];
         },
+      /*  country(){
+            return this.find_country(this.cities["_id"])
+        }*/
     },
     data() {
         return {
@@ -54,6 +59,16 @@ export default {
         }
     },
     methods: {
+       /* find_country(_id){
+            let name =""
+            axios.get(BASE_URL + '/countries/' + this.$store.state._id).then((result) => {
+               name = result.data['name'];
+                console.log("logs ", result.data['name'])
+            }).catch((error) => {
+                console.log("some error occured", error);
+            })
+            return result.data['name']
+        },*/
         confirmer(city_id) {
             Swal.fire({
                 title: 'Etes vous sûre de supprimer cette ville?',
@@ -86,6 +101,7 @@ export default {
 
     mounted() {
         this.$store.dispatch("cities/GET_CITIES");
+        //this.$store.dispatch("")
     },
 
 }

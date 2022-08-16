@@ -176,127 +176,65 @@
               </div>
               <!-- </div>-->
             </div>
-
-            <div class="flex space-x-4 items-center justify-between">
-              <div class="flex space-x-4 items-center justify-center text-xs">
-                <img src="../assets/images/avatar.png" alt="" class="rounded-full border border-gray-500" height="30"
-                  width="30"> <span>Lomé city tour</span>
-              </div>
-              <div><span class="text-xs font-semibold text-centre">TG</span></div>
-              <!--<div class="flex space-x-4">-->
-              <div class="flex space-x-3">
-                <div class="bg-yellow-500 h-3 w-3 rounded-full"></div>
-                <div class="flex flex-col">
-                  <span class="text-gray-500 text-xs">En attente</span>
-                  <span class="text-black text-sm">220</span>
-                </div>
-              </div>
-              <div class="flex space-x-3">
-                <div class="bg-green-500 h-3 w-3 rounded-full"></div>
-                <div class="flex flex-col">
-                  <span class="text-gray-500 text-xs">En cours</span>
-                  <span class="text-black text-sm">190</span>
-                </div>
-              </div>
-              <div class="flex space-x-3">
-                <div class="bg-red-500 h-3 w-3 rounded-full"></div>
-                <div class="flex flex-col">
-                  <span class="text-gray-500 text-xs">Annulé</span>
-                  <span class="text-black text-sm">40</span>
-                </div>
-              </div>
-              <!-- </div>-->
-            </div>
-
-            <div class="flex space-x-4 items-center justify-between">
-              <div class="flex space-x-4 items-center justify-center text-xs">
-                <img src="../assets/images/avatar.png" alt="" class="rounded-full border border-gray-500" height="30"
-                  width="30"> <span>Lomé city tour</span>
-              </div>
-              <div><span class="text-xs font-semibold text-centre">TG</span></div>
-              <!--<div class="flex space-x-4">-->
-              <div class="flex space-x-3">
-                <div class="bg-yellow-500 h-3 w-3 rounded-full"></div>
-                <div class="flex flex-col">
-                  <span class="text-gray-500 text-xs">En attente</span>
-                  <span class="text-black text-sm">220</span>
-                </div>
-              </div>
-              <div class="flex space-x-3">
-                <div class="bg-green-500 h-3 w-3 rounded-full"></div>
-                <div class="flex flex-col">
-                  <span class="text-gray-500 text-xs">En cours</span>
-                  <span class="text-black text-sm">190</span>
-                </div>
-              </div>
-              <div class="flex space-x-3">
-                <div class="bg-red-500 h-3 w-3 rounded-full"></div>
-                <div class="flex flex-col">
-                  <span class="text-gray-500 text-xs">Annulé</span>
-                  <span class="text-black text-sm">40</span>
-                </div>
-              </div>
-              <!-- </div>-->
-            </div>
           </div>
           <div class="statsAreaflex w-1/3 h-auto space-x-4 flex">
             <div class="flex w-full flex-col space-y-4">
               <div class="bg-blue-800 rounded-xl flex flex-col space-y-2 p-4">
                 <span class="text-blue-300 text-sm font-medium">Site touristiques</span>
                 <div class="flex space-x-2">
-                  <div><span class="text-white text-bold text-2xl">150</span></div>
+                  <div><span class="text-white text-bold text-2xl">4</span></div>
                   <div class="flex flex-col space-y-1">
                     <span class="text-white text-bold text-2xl">sites ajoutés</span>
-                    <span class="text-blue-300 text-sm font-medium">90 sites actifs</span>
+                    <span class="text-blue-300 text-sm font-medium">2 sites actifs</span>
                   </div>
                 </div>
                 <div class="flex space-x-2">
-                  <div><span class="text-white text-bold text-2xl">150</span></div>
+                  <div><span class="text-white text-bold text-2xl">5</span></div>
                   <div class="flex flex-col space-y-1">
-                    <span class="text-white text-bold text-2xl">sites ajoutés</span>
-                    <span class="text-blue-300 text-sm font-medium">90 sites actifs</span>
+                    <span class="text-white text-bold text-2xl">activités ajoutés</span>
+                    <span class="text-blue-300 text-sm font-medium">3 activités actives</span>
                   </div>
                 </div>
                 <div class="flex space-x-2">
-                  <div><span class="text-white text-bold text-2xl">150</span></div>
+                  <div><span class="text-white text-bold text-2xl">7</span></div>
                   <div class="flex flex-col space-y-1">
-                    <span class="text-white text-bold text-2xl">sites ajoutés</span>
-                    <span class="text-blue-300 text-sm font-medium">90 sites actifs</span>
+                    <span class="text-white text-bold text-2xl">expériences ajoutés</span>
+                    <span class="text-blue-300 text-sm font-medium">6 expériences actifs</span>
                   </div>
                 </div>
                 <div class="p-0 flex items-end justify-end">
-                  <a href="#" class="bg-white/50 text-white text-base rounded-2xl p-2 flex w-fit">
-                    <span>Créer un site</span>
+                  <a href="#" class="bg-white text-white text-base rounded-2xl p-2 flex w-fit">
+                    <span class="text-blue-800">Créer un site</span>
                     <img src="../assets/icons/Iconplus.svg" alt="">
                   </a>
                 </div>
               </div>
-              <div class="bg-violet-800 rounded-xl flex flex-col space-y-2 p-4">
-                <span class="text-violet-300 text-sm font-medium">Site touristiques</span>
+              <div class="bg-green-700 rounded-xl flex flex-col space-y-2 p-4">
+                <span class="text-green-300 text-sm font-medium">utilisateurs</span>
                 <div class="flex space-x-2">
-                  <div><span class="text-white text-bold text-2xl">150</span></div>
+                  <div><span class="text-white text-bold text-2xl">5</span></div>
                   <div class="flex flex-col space-y-1">
-                    <span class="text-white text-bold text-2xl">sites ajoutés</span>
-                    <span class="text-violet-300 text-sm font-medium">90 sites actifs</span>
+                    <span class="text-white text-bold text-2xl">Administrateur ajoutés</span>
+                    <span class="text-green-300 text-sm font-medium">4 sites actifs</span>
+                  </div>
+                </div>
+                <div class="flex space-x-2">
+                  <div><span class="text-white text-bold text-2xl">20</span></div>
+                  <div class="flex flex-col space-y-1">
+                    <span class="text-white text-bold text-2xl">Guides ajoutés</span>
+                    <span class="text-green-300 text-sm font-medium">10 sites actifs</span>
                   </div>
                 </div>
                 <div class="flex space-x-2">
                   <div><span class="text-white text-bold text-2xl">150</span></div>
                   <div class="flex flex-col space-y-1">
-                    <span class="text-white text-bold text-2xl">sites ajoutés</span>
-                    <span class="text-violet-300 text-sm font-medium">90 sites actifs</span>
-                  </div>
-                </div>
-                <div class="flex space-x-2">
-                  <div><span class="text-white text-bold text-2xl">150</span></div>
-                  <div class="flex flex-col space-y-1">
-                    <span class="text-white text-bold text-2xl">sites ajoutés</span>
-                    <span class="text-violet-300 text-sm font-medium">90 sites actifs</span>
+                    <span class="text-white text-bold text-2xl">Utilisateurs ajoutés</span>
+                    <span class="text-green-300 text-sm font-medium">100 sites actifs</span>
                   </div>
                 </div>
                 <div class="p-0 flex items-end justify-end">
-                  <a href="#" class="bg-white/50 text-white text-base rounded-2xl p-2 flex w-fit">
-                    <span>Créer un site</span>
+                  <a href="#" class="bg-white text-white text-base rounded-2xl p-2 flex w-fit">
+                    <span class="text-green-700">Créer un site</span>
                     <img src="../assets/icons/Iconplus.svg" alt="">
                   </a>
                 </div>

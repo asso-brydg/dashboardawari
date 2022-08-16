@@ -10,8 +10,6 @@ export const state = () => ({
     oneActivity:{},
     _id:""
 });
-
-
 export const mutations =  ({
     SET_NEW_ACTIVITY(state, activity){
         state.new_activity = activity 

@@ -31,7 +31,7 @@
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la gallerie de la ville">
                         <select name="" id="" v-model="country_id">
-                            <option v-for="country in countries" :key="country" :value="country['_id']">{{ country["name"] }}
+                            <option v-for="country in countries" :key="country" :value="country['id']">{{ country["name"] }}
                             </option>
                         </select>
                        <!-- <input type="text"
@@ -109,7 +109,7 @@ export default {
                 gallery: this.gallery,
                 country_id: this.country_id,
             }
-            console.log(this.country_id)
+           // console.log(this.country_id)
 
             if (!new_city) {
                 Swal.fire({

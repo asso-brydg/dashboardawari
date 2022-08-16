@@ -25,10 +25,10 @@
                             placeholder="Entrer la description de l'activité"></textarea>
                         <input type="text" v-model="featuredImage"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer une images de mise en avant de l'activité">
+                            placeholder="Entrer une image de mise en avant de l'activité">
                         <input type="text" v-model="location"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer la d'adresse de l'activité">
+                            placeholder="Entrer l'adresse de l'activité">
                         <input type="text" v-model="gallery"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la gallerie de l'activité">
@@ -42,11 +42,11 @@
                             placeholder="Entrer la date de départ de l'activité">
                         <input type="text" v-model="meetingAdress"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer l'adresse de meetingAdress de l'activité">
+                            placeholder="Entrer l'adresse de rendez-vous de l'activité">
                         <input type="number"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer le prix de l'activité" v-model="price">
-                        <select name="" id="" v-model="city_id">
+                        <select name="" id="" v-model="city_id"   class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
                             <option v-for="city in cities" :key="city" :value="city['_id']">{{
                                     city["name"]
                             }}

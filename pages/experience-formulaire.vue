@@ -48,17 +48,14 @@
                         <input type="number"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer le prix de l'expérience" v-model="price">
-                        <input type="text" v-model="city_id"
-                            class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer la ville de l'expérience">
-                        <select name="" id="">
-                            <option v-for="option in options" :key="option" :value="option['id']">{{ option["name"] }}
+                        <select name="" id="" v-model="city_id" class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
+                            <option v-for="city in cities" :key="city" :value="city['_id']">{{ city["name"] }}
                             </option>
                         </select>
-                        <input type="number" v-model="activity_id"
-                            class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer les activités de l'expérience">
-
+                         <select name="" id="" v-model="activity_id" class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
+                            <option v-for="activity in activities" :key="activity" :value="activity['_id']">{{ activity["name"] }}
+                            </option>
+                        </select>
                         <input type="number" v-model="duration"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la durée de l'expérience (en jours)">
@@ -88,7 +85,17 @@ import { url } from "./url";
 export default {
     name: 'experienceForm',
     components: { HeaderView, NavbarView },
+     computed: {
+        cities() {
+            return this.$store.state.cities['cities'];
+        },
+         activities() {
+            return this.$store.state.activities['activities'];
+        },
+    },
     mounted() {
+        this.$store.dispatch("activities/GET_ACTIVITIES");
+        this.$store.dispatch("cities/GET_CITIES");
         let id = this.$route.query["_id"]
         this.id = id;
         if (id) {

@@ -51,7 +51,7 @@ export default {
                 })
                 .then(() => {
                     this.$router.push({ path: 'dashboard' })
-                        
+                    //console.log("user",state.user)       
                 })
                 .catch(err => {
                     Swal.fire({

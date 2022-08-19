@@ -23,7 +23,7 @@
           <img src="../assets/images/avatar.png" alt="" height="35" width="35" class="rounded-full">
         </div>
         <div class="flex flex-col text-xs space-y-1 text-gray-500 font-bold justify-center text-center">
-          <span class="text-black text-sm font-extrabold">Charles DZADU</span>
+          <span class="text-black text-sm font-extrabold">{{ $store.state.user }}</span>
           <span class="text-xs">Super administrateur</span>
         </div>
         <div class="flex text-xs text-gray-300 font-bold items-center justify-center space-x-3">
@@ -31,7 +31,7 @@
             <img src="../assets/icons/Iconsettings.svg" alt="" class="iconsConfig" />
           </a>
           <a href="#">
-            <img src="../assets/icons/Iconpower.svg" alt="" class="iconsConfig" />
+            <img src="../assets/icons/Iconpower.svg" alt="" class="iconsConfig" @click="signOut" />
           </a>
         </div>
       </div>
@@ -40,9 +40,27 @@
 </template>
 <script>
 import SearchBar from './SearchBar.vue';
+import { mapGetters } from "vuex";
+
 export default {
-    name: "HeaderView",
-    components: { SearchBar }
+  name: "HeaderView",
+  components: { SearchBar },
+  computed: {
+    ...mapGetters({
+      user: "user"
+    })
+  },
+  methods: {
+    signOut: function (err) {
+      this.$store.dispatch("auth/signOut").then(() => {
+     // this.$store.commit('auth/setUser', null)
+     // this.$store.commit('auth/setPass', null)
+      })
+        .catch(err => {
+          alert(err.message);
+        });
+    }
+  }
 }
 
 </script>

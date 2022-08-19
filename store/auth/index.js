@@ -1,35 +1,28 @@
 import { auth } from '~/plugins/firebase.js'
 import { firebase } from '~/plugins/firebase.js'
 
-
-
-
 export const state = () => ({
-    user: {},
+    user: "",
 });
-
 
 
 export const mutations = ({
     setUser(state, payload) {
         state.user = payload
+        //console.log("mutation", state.user)
     },
-
+    resetUser(state){
+        state.user = null
+    }
 })
 
-/*export default function ({ store, redirect }) {
-    if (!state.user) {
-      return redirect('/login')
-    }else{
-        return redirect ('/dasboard')
-    }
-  }*/
+
 
 
 
 export const actions = ({
     signUp({ commit }, { email, password }) {
-        console.log(email, password)
+        //console.log(email, password)
         // firebase.firestore().collection("users").doc(email).set({
         //     "email": email,
         // })
@@ -38,14 +31,15 @@ export const actions = ({
 
     },
 
-    signInWithEmail({ commit }, { email, password }) {
+    signInWithEmail({ commit}, { email, password }) {
         return auth.signInWithEmailAndPassword(email, password).then(()=>{
-           commit("setUser",auth.currentUser)
-            //console.log(state.user)
+          commit("setUser",auth.currentUser)
         })
     },
 
-    signOut() {
-        return auth.signOut()
+    signOut({ commit}){
+        return auth.signOut().then(()=>{
+            commit("resetUser")
+        })
     }
 })

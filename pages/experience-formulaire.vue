@@ -131,7 +131,7 @@ export default {
             location: "",
             gallery: "",
             tags: "",
-             type: "",
+            type: "",
             departureDate: "",
             meetingAdress: "",
             price: "",
@@ -139,44 +139,6 @@ export default {
             activity_id: "",
             duration: "",
             vehicleIsAvailable: "",
-            options: [
-                {
-                    id: 100,
-                    name: "kpalime excusrion",
-                    city: "kpalime",
-                    price: 25000,
-                    duration: 5
-                },
-                {
-                    id: 256,
-                    name: "kpalime excusrion",
-                    city: "kpalime",
-                    price: 25000,
-                    duration: 5
-                },
-                {
-                    id: 3,
-                    name: "kpalime excusrion",
-                    city: "kpalime",
-                    price: 25000,
-                    duration: 5
-                },
-                {
-                    id: 4,
-                    name: "kpalime excusrion",
-                    city: "kpalime",
-                    price: 25000,
-                    duration: 5
-                }
-            ]
-        }
-    },
-
-    mounted() {
-        if (this.$route.query['modify'] == "true") {
-            console.log("modifier est true, je dois récuper ", this.$route.query);
-        } else {
-            console.log("Ah tu veux créer.. C'est bien ")
         }
     },
 
@@ -199,7 +161,7 @@ export default {
                 location: this.location,
                 gallery: this.gallery,
                 tags: this.tags,
-                 type: this.type,
+                type: this.type,
                 departureDate: this.departureDate,
                 meetingAdress: this.meetingAdress,
                 price: this.price,
@@ -210,6 +172,12 @@ export default {
             }
             if (new_experience) {
                 this.$store.commit("experiences/ADD_EXPERIENCE", new_experience);
+                  Swal.fire({
+                     title: 'success!',
+                     text: 'enregistrement réussi',
+                     icon: 'success',
+                     confirmButtonText: 'Cool'
+                 })
             }
 
             /* this.name = "",
@@ -229,6 +197,11 @@ export default {
             //this.$alert("Enrégistrement réussi!!!");
         },
           update_experience() {
+            if (this.vehicleIsAvailable == "oui") {
+                this.vehicleIsAvailable = true
+            } else {
+                this.vehicleIsAvailable = false
+            }
             let updatedExperience = {
                 id: this.id,
                 name: this.name,

@@ -6,17 +6,62 @@
             </div>
             <span class="font-bold text-2xl">Bienvenue!!</span>
             <span class="text-2xl text-center">saisissez vos informations pour accéder au tableau de bord</span>
-            <input type="text" class="w-full p-6 rounded-xl text-gray-400 border border-gray-200 text-xl" placeholder="Entrer votre mail">
-            <input type="text" class="w-full p-6 rounded-xl text-gray-400 border border-gray-200 text-xl" placeholder="Entrer votre mot de passe">
+            <input type="text" class="w-full p-6 rounded-xl text-gray-400 border border-gray-200 text-xl"
+                placeholder="Entrer votre mail" v-model="email">
+            <input type="text" class="w-full p-6 rounded-xl text-gray-400 border border-gray-200 text-xl"
+                placeholder="Entrer votre mot de passe" v-model="password">
             <div class="space-x-4 flex items-center justify-center">
                 <span class="text-gray-400 text-sm">Mot de passe oublié?</span>
                 <a href="#" class=" underline hover:text-black text-gray-400 text-lg">Récupérez votre mot de passe</a>
             </div>
-            <a href="#" class="w-full bg-black text-white font-bold text-xl text-center p-6 rounded-xl hover:bg-yellow-500 hover:text-black">Connexion</a>
+            <button 
+                class="w-full bg-black text-white font-bold text-xl text-center p-6 rounded-xl hover:bg-yellow-500 hover:text-black"
+                @click="signinUser" >Connexion</button>
 
             <hr>
-            <a href="#" class="w-full bg-white text-black font-bold text-xl text-center p-6 rounded-xl border border-gray-200 hover:bg-black hover:text-white">S'enrégistrer avec Google</a>
-            <a href="#" class="w-full bg-white text-black font-bold text-xl text-center p-6 rounded-xl border border-gray-200 hover:bg-black hover:text-white">S'enrégistrer avec Facebook</a>
+            <a href="#"
+                class="w-full bg-white text-black font-bold text-xl text-center p-6 rounded-xl border border-gray-200 hover:bg-black hover:text-white">S'enrégistrer
+                avec Google</a>
+            <a href="#"
+                class="w-full bg-white text-black font-bold text-xl text-center p-6 rounded-xl border border-gray-200 hover:bg-black hover:text-white">S'enrégistrer
+                avec Facebook</a>
         </div>
     </div>
 </template>
+
+
+<script>
+const Swal = require('sweetalert2')
+export default {
+    middleware:'auth',
+    data() {
+        return {
+            email: "",
+            password: ""
+        }
+    },
+    methods: {
+        signinUser() {
+            var email = this.email
+            var password = this.password
+            this.$store
+                .dispatch("auth/signInWithEmail", {
+                    email,
+                    password
+                })
+                .then(() => {
+                    this.$router.push({ path: 'dashboard' })
+                        
+                })
+                .catch(err => {
+                    Swal.fire({
+                        title: 'erreur!',
+                        text: 'Email ou mot de passe incorrect',
+                        icon: 'error',
+                        confirmButtonText: 'okay'
+                    })
+                });
+        },
+    }
+}
+</script>

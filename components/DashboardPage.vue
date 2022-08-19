@@ -215,26 +215,26 @@
                   <div><span class="text-white text-bold text-2xl">5</span></div>
                   <div class="flex flex-col space-y-1">
                     <span class="text-white text-bold text-2xl">Administrateur ajoutés</span>
-                    <span class="text-green-300 text-sm font-medium">4 sites actifs</span>
+                    <span class="text-green-300 text-sm font-medium">4 administrateur actifs</span>
                   </div>
                 </div>
                 <div class="flex space-x-2">
                   <div><span class="text-white text-bold text-2xl">20</span></div>
                   <div class="flex flex-col space-y-1">
                     <span class="text-white text-bold text-2xl">Guides ajoutés</span>
-                    <span class="text-green-300 text-sm font-medium">10 sites actifs</span>
+                    <span class="text-green-300 text-sm font-medium">10 guides actifs</span>
                   </div>
                 </div>
                 <div class="flex space-x-2">
                   <div><span class="text-white text-bold text-2xl">150</span></div>
                   <div class="flex flex-col space-y-1">
-                    <span class="text-white text-bold text-2xl">Utilisateurs ajoutés</span>
-                    <span class="text-green-300 text-sm font-medium">100 sites actifs</span>
+                    <span class="text-white text-bold text-2xl">Touristes ajoutés</span>
+                    <span class="text-green-300 text-sm font-medium">100 touristes actifs</span>
                   </div>
                 </div>
                 <div class="p-0 flex items-end justify-end">
                   <a href="#" class="bg-white text-white text-base rounded-2xl p-2 flex w-fit">
-                    <span class="text-green-700">Créer un site</span>
+                    <span class="text-green-700">Créer un utilisateur</span>
                     <img src="../assets/icons/Iconplus.svg" alt="">
                   </a>
                 </div>

@@ -19,7 +19,7 @@
                             <td class="py-4 text-center">{{ activity['_id'] }}</td>
                             <td class="py-4 text-center">{{ activity['name'] }}</td>
                             <td class="py-4 text-center">{{ activity['price'] }} </td>
-                            <td class="py-4 text-center">{{ activity['duration'] }}</td>
+                            <td class="py-4 text-center">{{ activity['duration']}} jours</td>
                             <td class="flex items-center justify-center py-4 space-x-3 text-center">
                                 <button class="p-2 font-bold text-white bg-red-400 rounded-xl hover:bg-red-500"
                                     @click="confirmer(activity['_id'])">Supprimer</button>
@@ -53,6 +53,7 @@ export default {
         activities() {
             return this.$store.state.activities['activities'];
         },
+        
     },
     data() {
         return {

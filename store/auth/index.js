@@ -5,7 +5,7 @@ import { firebase } from '~/plugins/firebase.js'
 
 
 export const state = () => ({
-    user: "",
+    user: {},
 });
 
 
@@ -15,8 +15,15 @@ export const mutations = ({
         state.user = payload
     },
 
-
 })
+
+/*export default function ({ store, redirect }) {
+    if (!state.user) {
+      return redirect('/login')
+    }else{
+        return redirect ('/dasboard')
+    }
+  }*/
 
 
 
@@ -26,14 +33,16 @@ export const actions = ({
         // firebase.firestore().collection("users").doc(email).set({
         //     "email": email,
         // })
-        auth.createUserWithEmailAndPassword(email, password).then((data) => {
-
+       return auth.createUserWithEmailAndPassword(email, password).then((data) => {
         })
 
     },
 
     signInWithEmail({ commit }, { email, password }) {
-        return auth.signInWithEmailAndPassword(email, password)
+        return auth.signInWithEmailAndPassword(email, password).then(()=>{
+           commit("setUser",auth.currentUser)
+            //console.log(state.user)
+        })
     },
 
     signOut() {

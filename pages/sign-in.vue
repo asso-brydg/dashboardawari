@@ -14,9 +14,9 @@
                 <span class="text-gray-400 text-sm">Mot de passe oublié?</span>
                 <a href="#" class=" underline hover:text-black text-gray-400 text-lg">Récupérez votre mot de passe</a>
             </div>
-            <button 
+            <button
                 class="w-full bg-black text-white font-bold text-xl text-center p-6 rounded-xl hover:bg-yellow-500 hover:text-black"
-                @click="signinUser" >Connexion</button>
+                @click="signinUser">Connexion</button>
 
             <hr>
             <a href="#"
@@ -31,37 +31,43 @@
 
 
 <script>
-const Swal = require('sweetalert2')
+
+
 export default {
-    middleware:'auth',
+    middleware: 'auth',
     data() {
         return {
-            email: "",
-            password: ""
+            email: "jagbegbo@gmail.com",
+            password: "123465"
         }
     },
     methods: {
-        signinUser() {
+        async signinUser() {
             var email = this.email
             var password = this.password
-            this.$store
-                .dispatch("auth/signInWithEmail", {
+            console.log(typeof (email));
+
+            try {
+                var result = await this.$fire.auth.signInWithEmailAndPassword(
                     email,
                     password
-                })
-                .then(() => {
-                    this.$router.push({ path: 'dashboard' })
-                    //console.log("user",state.user)       
-                })
-                .catch(err => {
-                    Swal.fire({
-                        title: 'erreur!',
-                        text: 'Email ou mot de passe incorrect',
-                        icon: 'error',
-                        confirmButtonText: 'okay'
-                    })
-                });
+                );
+                console.log("results ", result);
+
+            } catch (e) {
+                console.log("error ", e);
+                
+            }
+
+
+            // this.$store.commit("auth/TEST_MUTATION", {email, password});
         },
+
+
+        logout(){
+            this.$fire.auth.signOut();
+            console.log("good");
+        }
     }
 }
 </script>

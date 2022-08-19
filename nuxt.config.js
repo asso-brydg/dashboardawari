@@ -19,8 +19,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/firebase.js',
-    '~/plugins/fireauth.js'
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -38,7 +37,39 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/firebase',
   ],
+
+  firebase: {
+    config: {
+      apiKey: "AIzaSyDr5zRrbsjym-CgQS9OFfy2UHKzJ7GHDJY",
+      authDomain: "awari-3fc51.firebaseapp.com",
+      projectId: "awari-3fc51",
+      storageBucket: "awari-3fc51.appspot.com",
+      messagingSenderId: "617929026568",
+      appId: "1:617929026568:web:dc01c93315fcc6739eb5bd",
+      measurementId: "G-SL3BNHT4HD"
+    },
+    services: {
+      auth: true,
+      storage: true,
+      firestore: true,
+      analytics: true,
+
+    },
+
+    auth: {
+      persistence: 'local', // default
+      initialize: {
+        onAuthStateChangedMutation: 'auth/ON_AUTH_STATE_CHANGED_MUTATION',
+        onAuthStateChangedAction: 'onAuthStateChangedAction',
+        subscribeManually: false
+      },
+    },
+  },
+
+
+  
 
 
   router: {

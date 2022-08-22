@@ -32,7 +32,7 @@
 
 <script>
 
-
+//import 'firebase/auth'
 export default {
     middleware: 'auth',
     data() {
@@ -45,18 +45,16 @@ export default {
         async signinUser() {
             var email = this.email
             var password = this.password
-            console.log(typeof (email));
+           // console.log(typeof (email));
 
             try {
-                var result = await this.$fire.auth.signInWithEmailAndPassword(
-                    email,
-                    password
-                );
-                console.log("results ", result);
-
+                this.$store.dispatch('auth/signInWithEmail', { email, password }).then(() => {
+                    this.$router.push({ path: 'dashboard' })
+                    console.log("réussi");
+                })
             } catch (e) {
                 console.log("error ", e);
-                
+
             }
 
 
@@ -64,10 +62,7 @@ export default {
         },
 
 
-        logout(){
-            this.$fire.auth.signOut();
-            console.log("good");
-        }
+      
     }
 }
 </script>

@@ -23,20 +23,47 @@
                         <textarea name="" id="" cols="30" rows="10" v-model="description"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la description de l'activité"></textarea>
-                        <input type="text" v-model="featuredImage"
-                            class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer une image de mise en avant de l'activité">
+                        <div class="flex flex-col border border-gray-200 space-y-4 p-4 rounded-xl">
+                            <input type="text" v-model="featuredImage"
+                                class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
+                            <button @click="launchImageFile" :disabled="isUploadingImage"
+                                class="bg-blue-400 rounded-xl p-4" type="button">
+                                {{ isUploadingImage ? 'chargement...' : 'choisir une image' }}
+                            </button>
+                            <input ref="imageFile" @change.prevent="uploadImageFile($event.target.files)" type="file"
+                                accept="image/png, image/jpeg" class="hidden">
+                        </div>
                         <input type="text" v-model="location"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer l'adresse de l'activité">
-                        <input type="text" v-model="gallery"
-                            class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer la gallerie de l'activité">
+                        <div class="flex flex-col border border-gray-200 space-y-4 p-4 rounded-xl">
+                            <input type="text" v-model="gallery" class="" />
+                            <div class="flex space-x-4 p-4 rounded-xl ">
+                                <button @click="launchImageFile" class="bg-blue-400 rounded-xl p-4" type="button">
+                                    {{ isUploadingImage ? 'chargement...' : 'choisir une image' }}
+                                </button>
+                                <button @click="ajouterGallerie" class="bg-gray-400 rounded-xl p-4" type="button">
+                                    ajouter
+                                </button>
+                            </div>
+                            <div class="flex flex-col space-y-4" v-for="gallerie in galleries">
+                                <div class="flex space-x-4 p-4">
+                                    <button class="bg-red-400 p-2 rounded-xl"
+                                        @click="retirerGallerie(gallerie)">delete</button>
+                                    <img :src=gallerie alt="" width="60" height="60">
+                                </div>
+                            </div>
+                            <input ref="imageFile" @change.prevent="uploadGalleryFile($event.target.files)" type="file"
+                                accept="image/png, image/jpeg" class="hidden">
+                            <div class=" flex flex-col space-y-4 p-4">
+
+                            </div>
+                        </div>
                     </div>
                     <div class="p-2 flex flex-col w-1/2 space-y-4">
                         <input type="text" v-model="tags"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer les tags de l'activité">
+                            placeholder="Entrer les tags de l'activité séparé de ','">
                         <input type="date" v-model="departureDate"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la date de départ de l'activité">
@@ -46,7 +73,8 @@
                         <input type="number"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer le prix de l'activité" v-model="price">
-                        <select name="" id="" v-model="city_id"   class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
+                        <select name="" id="" v-model="city_id"
+                            class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
                             <option v-for="city in cities" :key="city" :value="city['_id']">{{
                                     city["name"]
                             }}
@@ -67,7 +95,7 @@
 
                 <button v-if="id != null"
                     class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
-                    @click="update_activity">Modifier l'activité</button>
+                    @click="tab">Modifier l'activité</button>
             </div>
         </div>
     </div>
@@ -77,6 +105,7 @@
 import HeaderView from '~/components/HeaderView.vue';
 import NavbarView from '~/components/NavbarView.vue';
 const Swal = require('sweetalert2')
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios"
 const BASE_URL = url;
 import { url } from "./url";
@@ -122,19 +151,188 @@ export default {
             description: "",
             featuredImage: "",
             location: "",
-            gallery: "",
+           // gallery: "",
             tags: "",
             departureDate: "",
             meetingAdress: "",
             price: "",
             city_id: "",
             duration: "",
-            vehicleIsAvailable: ""
+            vehicleIsAvailable: "",
+            blog: {},
+            isUploadingImage: false,
+            isDeletingImage: false,
+            array: "",
+            galleries: []
         }
     },
 
     methods: {
+        ajouterGallerie() {
+            this.galleries.push(this.gallery)
+            console.log(this.galleries)
+        },
+        retirerGallerie(element) {
+            const index = this.galleries.indexOf(element)
+            this.galleries.splice(index, 1);
+        },
+        launchImageFile() {
+            // Trigger the file input click event.
+            this.$refs.imageFile.click()
+        },
+        uploadGalleryFile(files) {
+            if (!files.length) {
+                return
+            }
+            const file = files[0]
+
+            if (!file.type.match('image.*')) {
+                alert('Please upload an image.')
+                return
+            }
+
+            const metadata = {
+                contentType: file.type
+            }
+
+            this.isUploadingImage = true
+
+            // Create a reference to the destination where we're uploading
+            // the file.
+            // const storage = this.$firebase.storage();
+            const storage = getStorage();
+            console.log("storage", storage);
+
+            const imageRef = ref(storage, `images/${files.name}`)
+            const uploadTask = uploadBytesResumable(imageRef, file);
+
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // Observe state change events such as progress, pause, and resume
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused');
+                            break;
+                        case 'running':
+                            console.log('Upload is running');
+                            break;
+                    }
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                },
+                () => {
+                    // Handle successful uploads on complete
+                    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+
+                        console.log('File available at', downloadURL);
+                        this.gallery = downloadURL
+                    });
+                }
+            );
+
+            // const uploadTask = imageRef.put(file, metadata).then((snapshot) => {
+            //   // Once the image is uploaded, obtain the download URL, which
+            //   // is the publicly accessible URL of the image.
+            //   return snapshot.ref.getDownloadURL().then((url) => {
+            //     return url
+            //   })
+            // }).catch((error) => {
+            //   console.error('Error uploading image', error)
+            // })
+
+            // When the upload ends, set the value of the blog image URL
+            // and signal that uploading is done.
+            uploadTask.then((url) => {
+                this.blog.imageUrl = url
+                this.isUploadingImage = false
+            })
+        },
+
+
+
+
+        //image
+        uploadImageFile(files) {
+            if (!files.length) {
+                return
+            }
+            const file = files[0]
+
+            if (!file.type.match('image.*')) {
+                alert('Please upload an image.')
+                return
+            }
+
+            const metadata = {
+                contentType: file.type
+            }
+
+            this.isUploadingImage = true
+
+            // Create a reference to the destination where we're uploading
+            // the file.
+            // const storage = this.$firebase.storage();
+            const storage = getStorage();
+            console.log("storage", storage);
+
+            const imageRef = ref(storage, `images/${files.name}`)
+            const uploadTask = uploadBytesResumable(imageRef, file);
+
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // Observe state change events such as progress, pause, and resume
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused');
+                            break;
+                        case 'running':
+                            console.log('Upload is running');
+                            break;
+                    }
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                },
+                () => {
+                    // Handle successful uploads on complete
+                    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+
+                        console.log('File available at', downloadURL);
+                        this.featuredImage = downloadURL
+                    });
+                }
+            );
+
+            // const uploadTask = imageRef.put(file, metadata).then((snapshot) => {
+            //   // Once the image is uploaded, obtain the download URL, which
+            //   // is the publicly accessible URL of the image.
+            //   return snapshot.ref.getDownloadURL().then((url) => {
+            //     return url
+            //   })
+            // }).catch((error) => {
+            //   console.error('Error uploading image', error)
+            // })
+
+            // When the upload ends, set the value of the blog image URL
+            // and signal that uploading is done.
+            uploadTask.then((url) => {
+                this.blog.imageUrl = url
+                this.isUploadingImage = false
+            })
+        },
         add_new_activity() {
+            // var match = this.array.split(', ')
+            // var tabTag = this.tags.split(',')
+            console.log(this.tags)
             if (this.vehicleIsAvailable == "oui") {
                 this.vehicleIsAvailable = true
             } else {
@@ -146,8 +344,8 @@ export default {
                 description: this.description,
                 featuredImage: this.featuredImage,
                 location: this.location,
-                gallery: this.gallery,
-                tags: this.tags,
+                gallery: this.galleries,
+                tags: tabTag,
                 departureDate: this.departureDate,
                 meetingAdress: this.meetingAdress,
                 price: this.price,
@@ -201,6 +399,11 @@ export default {
              this.vehicleIsAvailable=""*/
         },
         update_activity() {
+          // const tabTag = this.tags.split(",")
+           // console.log(tabTag)
+            //const text = "amen, okay, hello"
+            //const tab = text.split(",")
+           // console.log(text)
             let updatedActivity = {
                 id: this.id,
                 name: this.name,
@@ -208,7 +411,7 @@ export default {
                 description: this.description,
                 featuredImage: this.featuredImage,
                 location: this.location,
-                gallery: this.gallery,
+                gallery: this.galleries,
                 tags: this.tags,
                 departureDate: this.departureDate,
                 meetingAdress: this.meetingAdress,
@@ -262,6 +465,12 @@ export default {
              this.duration="",
              this.vehicleIsAvailable=""
         }*/
+        },
+        tab(){
+            /*const text = "amen, okay, hello"
+            const tab = text.split(",")
+            console.log(text)*/
+            console.log(this.galleries)
         }
     }
 }

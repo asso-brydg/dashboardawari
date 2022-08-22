@@ -17,6 +17,8 @@
     <!-- This is the real file input element. -->
     <input ref="imageFile" @change.prevent="uploadImageFile($event.target.files)" type="file"
       accept="image/png, image/jpeg" class="hidden">
+      <input type="text" v-model="tags">
+      <button @click="tab">ok</button>
   </div>
 </template>
 
@@ -28,7 +30,8 @@ export default {
     return {
       blog: {},
       isUploadingImage: false,
-      isDeletingImage: false
+      isDeletingImage: false,
+      tags:""
     }
   },
   methods: {
@@ -86,6 +89,7 @@ export default {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             
             console.log('File available at', downloadURL);
+          
           });
         }
       );
@@ -115,7 +119,17 @@ export default {
         .catch((error) => {
           console.error('Error deleting image', error)
         })
+    },
+    tab(){
+    
+    var tab = this.tags.split(',')
+    console.log(tab)
+    for (var a in tab)
+    {
+        var variable = tab[a]
+        console.log(variable)
     }
+}
   }
 }
 </script>

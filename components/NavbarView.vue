@@ -1,7 +1,7 @@
 <template>
     <div class="navbar flex flex-col h-auto w-1/5 space-y-4 mt-4 pr-8 font-bold text-gray-600 text-xs font-inter">
         <div class="flex">
-            <NuxtLink to='/sites-list' class="focus flex space-x-4">
+            <NuxtLink to='/site-list' class="focus flex space-x-4">
                 <img src="../assets/icons/Feed_solidVueDensemble.svg" alt="" class="iconsConfig">
                 <span>Sites</span>
             </NuxtLink>

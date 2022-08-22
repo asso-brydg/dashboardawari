@@ -1,6 +1,10 @@
 import { auth } from '~/plugins/firebase.js'
 import { firebase } from '~/plugins/firebase.js'
-
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut
+} from 'firebase/auth'
 export const state = () => ({
     user: "",
     data: "",
@@ -46,20 +50,26 @@ export const actions = ({
         // firebase.firestore().collection("users").doc(email).set({
         //     "email": email,
         // })
-        return auth.createUserWithEmailAndPassword(email, password).then((data) => {
+        return $fire.auth.createUserWithEmailAndPassword(email, password).then((data) => {
         })
 
     },
 
     signInWithEmail({ commit }, { email, password }) {
-        return auth.signInWithEmailAndPassword(email, password).then(() => {
+        return  this.$fire.auth.signInWithEmailAndPassword(
+            email,
+            password
+            
+        ).then(()=>{
             commit("setUser", auth.currentUser)
         })
+       
     },
 
-    signOut({ commit }) {
-        return auth.signOut().then(() => {
+    LogOut({ commit }) {
+        return signOut(auth).then(() => {
             commit("resetUser")
+            console.log("okay")
         })
     }
 })

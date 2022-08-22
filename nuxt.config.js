@@ -57,7 +57,6 @@ export default {
       analytics: true,
 
     },
-
     auth: {
       persistence: 'local', // default
       initialize: {
@@ -66,8 +65,9 @@ export default {
         subscribeManually: false
       },
     },
+   
   },
-
+  
 
   
 

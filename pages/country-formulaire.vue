@@ -26,9 +26,16 @@
 
                     </div>
                     <div class="p-2 flex flex-col w-1/2 space-y-4">
-                        <input type="text" v-model="featuredImage"
-                            class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
-                            placeholder="Entrer une images de mise en avant du pays">
+                        <div class="flex flex-col border border-gray-200 space-y-4 p-4 rounded-xl">
+                            <input type="text" v-model="featuredImage"
+                                class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
+                            <button @click="launchImageFile" :disabled="isUploadingImage"
+                                class="bg-blue-400 rounded-xl p-4" type="button">
+                                {{ isUploadingImage ? 'chargement...' : 'choisir une image' }}
+                            </button>
+                            <input ref="imageFile" @change.prevent="uploadImageFile($event.target.files)" type="file"
+                                accept="image/png, image/jpeg" class="hidden">
+                        </div>
 
                         <input type="text" v-model="gallery"
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
@@ -41,7 +48,8 @@
                             placeholder="Entrer le résumé du pays">
                     </div>
                 </div>
-                <button v-if="id == null" class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
+                <button v-if="id == null"
+                    class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
                     @click="add_new_country">Enrégistrer</button>
 
                 <button v-if="id != null"
@@ -56,13 +64,14 @@
 import HeaderView from '~/components/HeaderView.vue';
 import NavbarView from '~/components/NavbarView.vue';
 const Swal = require('sweetalert2')
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios"
 const BASE_URL = url;
 import { url } from "./url";
 export default {
     name: 'countryForm',
     components: { HeaderView, NavbarView },
-     mounted() {
+    mounted() {
         let id = this.$route.query["_id"]
         this.id = id;
         if (id) {
@@ -70,7 +79,7 @@ export default {
                 this.name = result.data['name'];
                 this.code = result.data['code'];
                 this.phoneCode = result.data['phoneCode'];
-                 this.excerpt = result.data['excerpt'];
+                this.excerpt = result.data['excerpt'];
                 this.description = result.data['description'];
                 this.featuredImage = result.data['featuredImage'];
                 this.gallery = result.data['gallery'];
@@ -83,7 +92,7 @@ export default {
     },
     data() {
         return {
-            id:null,
+            id: null,
             code: "",
             name: "",
             phoneCode: "",
@@ -91,10 +100,90 @@ export default {
             description: "",
             featuredImage: "",
             gallery: "",
+            blog: {},
+            isUploadingImage: false,
+            isDeletingImage: false,
+            array: ""
         }
     },
 
     methods: {
+         launchImageFile() {
+            // Trigger the file input click event.
+            this.$refs.imageFile.click()
+        },
+        uploadImageFile(files) {
+            if (!files.length) {
+                return
+            }
+            const file = files[0]
+
+            if (!file.type.match('image.*')) {
+                alert('Please upload an image.')
+                return
+            }
+
+            const metadata = {
+                contentType: file.type
+            }
+
+            this.isUploadingImage = true
+
+            // Create a reference to the destination where we're uploading
+            // the file.
+            // const storage = this.$firebase.storage();
+            const storage = getStorage();
+            console.log("storage", storage);
+
+            const imageRef = ref(storage, `images/${files.name}`)
+            const uploadTask = uploadBytesResumable(imageRef, file);
+
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // Observe state change events such as progress, pause, and resume
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused');
+                            break;
+                        case 'running':
+                            console.log('Upload is running');
+                            break;
+                    }
+                },
+                (error) => {
+                    // Handle unsuccessful uploads
+                },
+                () => {
+                    // Handle successful uploads on complete
+                    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+
+                        console.log('File available at', downloadURL);
+                        this.featuredImage = downloadURL
+                    });
+                }
+            );
+
+            // const uploadTask = imageRef.put(file, metadata).then((snapshot) => {
+            //   // Once the image is uploaded, obtain the download URL, which
+            //   // is the publicly accessible URL of the image.
+            //   return snapshot.ref.getDownloadURL().then((url) => {
+            //     return url
+            //   })
+            // }).catch((error) => {
+            //   console.error('Error uploading image', error)
+            // })
+
+            // When the upload ends, set the value of the blog image URL
+            // and signal that uploading is done.
+            uploadTask.then((url) => {
+                this.blog.imageUrl = url
+                this.isUploadingImage = false
+            })
+        },
         add_new_country() {
             let new_country = {
                 code: this.code,
@@ -137,7 +226,7 @@ export default {
              this.vehicleIsAvailable=""*/
             //this.$alert("Enrégistrement réussi!!!");
         },
-          update_country() {
+        update_country() {
             let updatedCountry = {
                 id: this.id,
                 name: this.name,
@@ -148,7 +237,7 @@ export default {
                 gallery: this.gallery,
                 phoneCode: this.phoneCode,
             }
-             if ( /*this.name== ""
+            if ( /*this.name== ""
              ||this.excerpt== ""
              ||this.description== ""
              ||this.featuredImage== ""
@@ -161,38 +250,38 @@ export default {
              ||this.city_id== ""
              ||this.duration== ""
              ||this.vehicleIsAvailable== "" */!updatedCountry) {
-                 Swal.fire({
-                     title: 'erreur!',
-                     text: 'Aucun champ ne doit être vide',
-                     icon: 'error',
-                     confirmButtonText: 'okay'
-                 })
-             } else {
-                 this.$store.commit("countries/PUT_COUNTRY", updatedCountry, updatedCountry.id);
-                 console.log(updatedCountry.id)
-                 Swal.fire({
-                     title: 'success!',
-                     text: 'modification réussi',
-                     icon: 'success',
-                     confirmButtonText: 'Cool'
-                 })
-             }
- 
- 
-             /* this.name = "",
-              this.excerpt = "",
-              this.description = "",
-              this.featuredImage="",
-              this.location="",
-              this.gallery="",
-              this.tags="",
-              this.departureDate="",
-              this.meetingAdress="",
-              this.price="",
-              this.city_id="",
-              this.duration="",
-              this.vehicleIsAvailable=""
-         }*/
+                Swal.fire({
+                    title: 'erreur!',
+                    text: 'Aucun champ ne doit être vide',
+                    icon: 'error',
+                    confirmButtonText: 'okay'
+                })
+            } else {
+                this.$store.commit("countries/PUT_COUNTRY", updatedCountry, updatedCountry.id);
+                console.log(updatedCountry.id)
+                Swal.fire({
+                    title: 'success!',
+                    text: 'modification réussi',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
+            }
+
+
+            /* this.name = "",
+             this.excerpt = "",
+             this.description = "",
+             this.featuredImage="",
+             this.location="",
+             this.gallery="",
+             this.tags="",
+             this.departureDate="",
+             this.meetingAdress="",
+             this.price="",
+             this.city_id="",
+             this.duration="",
+             this.vehicleIsAvailable=""
+        }*/
         }
     }
 }

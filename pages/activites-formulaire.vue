@@ -46,7 +46,7 @@
                                     ajouter
                                 </button>
                             </div>
-                            <div class="flex flex-col space-y-4" v-for="gallerie in galleries">
+                            <div class="flex flex-col space-y-4" v-for="gallerie in galleries" :key="gallerie">
                                 <div class="flex space-x-4 p-4">
                                     <button class="bg-red-400 p-2 rounded-xl"
                                         @click="retirerGallerie(gallerie)">delete</button>
@@ -95,7 +95,7 @@
 
                 <button v-if="id != null"
                     class="w-full bg-blue-500 text-3xl text-gray-100 p-3 uppercase text-center hover:bg-blue-400"
-                    @click="tab">Modifier l'activité</button>
+                    @click="update_activity">Modifier l'activité</button>
             </div>
         </div>
     </div>
@@ -399,11 +399,12 @@ export default {
              this.vehicleIsAvailable=""*/
         },
         update_activity() {
-          // const tabTag = this.tags.split(",")
-           // console.log(tabTag)
-            //const text = "amen, okay, hello"
-            //const tab = text.split(",")
-           // console.log(text)
+            console.log(this.tags)
+          const tabTag = this.tags.split(",")
+           console.log(tabTag)
+            const text = "amen, okay, hello"
+            const tab = text.split(",")
+           console.log(text)
             let updatedActivity = {
                 id: this.id,
                 name: this.name,

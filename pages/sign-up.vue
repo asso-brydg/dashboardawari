@@ -14,7 +14,11 @@
             </div>
             <input v-model="password" type="password"
                 class="w-full p-6 rounded-xl text-gray-400 border border-gray-200 text-xl" placeholder=" mot de passe">
-
+            <select class="w-full p-6 rounded-xl text-gray-400 border border-gray-200 text-xl" v-model="role">
+                <option value="">Super dministrateur</option>
+                <option value="">Administrateur</option>
+                <option value="">Guide</option>
+            </select>
             <div class="space-x-4 flex items-center justify-center">
                 <input type="checkbox">
                 <span class="text-gray-400 text-xl">Je suis d'accord sur les</span>
@@ -41,22 +45,64 @@
 
 
 <script>
+const Swal = require('sweetalert2')
+
 export default {
     data() {
         return {
             type: "password",
-            email: "",
+            email: "jagbegbo@gmail.com",
             password: "",
             name: "",
+            role: ""
         }
     },
 
     methods: {
         signupUser() {
-            console.log(this.email);
-            var email = this.email;
-            var password = this.password;
-            this.$store.dispatch("auth/signUp", { email, password })
+            try {
+                //console.log(this.email);
+                const tab = []
+                this.$fire.firestore
+                    .collection("User")
+                    .where("email", "==", this.email)
+                    .get().then(querySnapshot => {
+                        querySnapshot.forEach(doc => {
+                            tab.push(doc.data());
+                        });
+                    });
+                console.log(tab)
+                for (let i = 0; i < tab.length; i++) {
+                    console.log(tab[i])
+                }
+
+                //  const utilisateur = this.$fire.firestore.collection('User').doc(this.email).get()
+                /* if (tab.length == 0) {
+                     var email = this.email;
+                     var password = this.password;
+                     this.$store.dispatch("auth/signUp", { email, password })
+                     this.$fire.firestore.collection("User").add({
+                         name: this.name,
+                         email: this.email,
+                         role: this.role
+                     })
+                     Swal.fire({
+                         title: 'erreur!',
+                         text: 'Enrégistrement réussi',
+                         icon: 'success',
+                         confirmButtonText: 'okay'
+                     })
+                 } else {
+                     Swal.fire({
+                         title: 'erreur!',
+                         text: 'Un utilisateur avec ce mail existe déjà',
+                         icon: 'error',
+                         confirmButtonText: 'okay'
+                     })
+                 }*/
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 }

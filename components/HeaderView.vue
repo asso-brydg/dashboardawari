@@ -43,6 +43,7 @@ import SearchBar from './SearchBar.vue';
 import { mapGetters } from "vuex";
 
 export default {
+  middleware: 'auth',
   name: "HeaderView",
   components: { SearchBar },
   computed: {
@@ -51,9 +52,11 @@ export default {
     })
   },
   methods: {
-      logout() {
-            this.$store.dispatch("auth/LogOut")
-        }
+    logout() {
+      this.$store.dispatch("auth/LogOut").then(()=>{
+         this.$router.push({ path: 'sign-in' })
+      })
+    }
   }
 }
 

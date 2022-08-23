@@ -234,7 +234,9 @@
                 </div>
                 <div class="p-0 flex items-end justify-end">
                   <a href="#" class="bg-white text-white text-base rounded-2xl p-2 flex w-fit">
-                    <span class="text-green-700">Créer un utilisateur</span>
+                    <NuxtLink to='/sign-up' class="">
+                      <span class="text-green-700">Créer un utilisateur</span>
+                    </NuxtLink>
                     <img src="../assets/icons/Iconplus.svg" alt="">
                   </a>
                 </div>
@@ -279,6 +281,6 @@ import HeaderView from './HeaderView.vue';
 import NavbarView from './NavbarView.vue';
 export default {
   name: 'DashboardPage',
-  components:{ HeaderView, HeaderView, NavbarView }
+  components: { HeaderView, HeaderView, NavbarView }
 }
 </script>

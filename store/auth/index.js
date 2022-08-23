@@ -30,7 +30,8 @@ export const mutations = ({
         //console.log("mutation", state.user)
     },
     resetUser(state) {
-        state.user = null
+        //state.user = null
+        console.log("okay")
     },
 
     signInWithEmail(state, { email, password }) {
@@ -50,7 +51,7 @@ export const actions = ({
         // firebase.firestore().collection("users").doc(email).set({
         //     "email": email,
         // })
-        return $fire.auth.createUserWithEmailAndPassword(email, password).then((data) => {
+        return auth.createUserWithEmailAndPassword(email, password).then((data) => {
         })
 
     },
@@ -67,9 +68,9 @@ export const actions = ({
     },
 
     LogOut({ commit }) {
-        return signOut(auth).then(() => {
+        return this.$fire.auth.signOut().then(() => {
             commit("resetUser")
-            console.log("okay")
+           // console.log("okay")
         })
     }
 })

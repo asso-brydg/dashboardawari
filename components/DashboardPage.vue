@@ -281,6 +281,10 @@ import HeaderView from './HeaderView.vue';
 import NavbarView from './NavbarView.vue';
 export default {
   name: 'DashboardPage',
-  components: { HeaderView, HeaderView, NavbarView }
+  components: { HeaderView, NavbarView }
 }
 </script>
+
+<style>
+    @import '~/assets/css/style.css'
+</style>

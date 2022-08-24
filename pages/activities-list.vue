@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col p-6 bg-gray-50 -z-20">
         <HeaderView />
-        <div class="flex w-auto">
+        <div class="flex w-auto justify-center items-center">
             <NavbarView />
             <div
                 class="flex flex-col items-center justify-center w-4/5 h-auto m-auto space-y-4 shadow shadow-gray-300 rounded-xl">

@@ -13,10 +13,10 @@
         <a href="#">Notifications</a>
         <a href="#">Settings</a>
       </div>
-      <div class="flex text-xs space-x-4 text-gray-500 font-bold">
+     <!-- <div class="flex text-xs space-x-4 text-gray-500 font-bold">
         <img src="../assets/icons/Vectorsearch.svg" alt="" class="text-gray-50 iconsConfig" height="10" width="10">
         <input type="text" placeholder="Trouver un utilisateur" class="bg-gray-50">
-      </div>
+      </div>-->
       <div class="flex space-x-4">
         <div class="relative">
           <div class="h-2 w-2 bg-green-500 rounded-full absolute top-0 right-0"></div>

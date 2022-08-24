@@ -24,8 +24,9 @@
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la description de l'activité"></textarea>
                         <div class="flex flex-col border border-gray-200 space-y-4 p-4 rounded-xl">
+                             <img :src=featuredImage alt="" width="250" height="250"/>
                             <input type="text" v-model="featuredImage"
-                                class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
+                                class="hidden w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
                             <button @click="launchImageFile" :disabled="isUploadingImage"
                                 class="bg-blue-400 rounded-xl p-4" type="button">
                                 {{ isUploadingImage ? 'chargement...' : 'choisir une image' }}
@@ -37,14 +38,14 @@
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer l'adresse de l'activité">
                         <div class="flex flex-col border border-gray-200 space-y-4 p-4 rounded-xl">
-                            <input type="text" v-model="gallery" class="" />
+                            <input type="text" v-model="gallery" class="hidden" />
                             <div class="flex space-x-4 p-4 rounded-xl ">
                                 <button @click="launchImageFile" class="bg-blue-400 rounded-xl p-4" type="button">
                                     {{ isUploadingImage ? 'chargement...' : 'choisir une image' }}
                                 </button>
-                                <button @click="ajouterGallerie" class="bg-gray-400 rounded-xl p-4" type="button">
+                                <!--<button @click="ajouterGallerie" class="bg-gray-400 rounded-xl p-4" type="button">
                                     ajouter
-                                </button>
+                                </button>-->
                             </div>
                             <div class="flex flex-col space-y-4" v-for="gallerie in galleries" :key="gallerie">
                                 <div class="flex space-x-4 p-4">
@@ -118,6 +119,7 @@ export default {
         },
     },
     mounted() {
+        this.galleries.push(this.gallery)
         this.$store.dispatch("cities/GET_CITIES");
         let id = this.$route.query["_id"]
         this.id = id;
@@ -181,6 +183,8 @@ export default {
             this.$refs.imageFile.click()
         },
         uploadGalleryFile(files) {
+            this.galleries.push(this.gallery)
+            console.log(this.galleries)
             if (!files.length) {
                 return
             }

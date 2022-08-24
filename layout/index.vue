@@ -1,10 +1,6 @@
 <template>
     <div class="flex flex-col">
-        <HeaderView/>
-        <div class="flex">
-            <NavbarView/>
-            <Nuxt></Nuxt>
-        </div>
+
     </div>
 </template>
 

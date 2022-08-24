@@ -23,8 +23,9 @@
                             class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center"
                             placeholder="Entrer la description de l'expérience"></textarea>
                         <div class="flex flex-col border border-gray-200 space-y-4 p-4 rounded-xl">
+                            <img :src=featuredImage alt="" width="250" height="250">
                             <input type="text" v-model="featuredImage"
-                                class="w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
+                                class=" hidden w-full h-auto p-3 text-sm text-gray-800 rounded-xl border border-gray-200 text-center">
                             <button @click="launchImageFile" :disabled="isUploadingImage"
                                 class="bg-blue-400 rounded-xl p-4" type="button">
                                 {{ isUploadingImage ? 'chargement...' : 'choisir une image' }}

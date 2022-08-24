@@ -49,7 +49,7 @@ export default {
 
             try {
                 this.$store.dispatch('auth/signInWithEmail', { email, password }).then(() => {
-                    this.$router.push({ path: 'dashboard' })
+                    this.$router.push({ path: 'acceuil' })
                     console.log("réussi");
                 })
             } catch (e) {

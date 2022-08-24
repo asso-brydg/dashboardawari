@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col space-y-6 justify-center">
-    <div class="flex justify-between items-center mb-4">
+    <div class="flex justify-between items-center">
       <div>
         <h1 class="text-2xl font-extrabold text-gray-600">
-          <NuxtLink to="/dashboard">Awari Togo</NuxtLink>
+          <NuxtLink to="/acceuil">Awari Togo</NuxtLink>
         </h1>
       </div>
       <div class="text-xs space-x-3 text-gray-300 font-bold">
-        <a href="#">Dashboard</a>
+        <NuxtLink to="/dashboard">Dashboard</NuxtLink>
         <a href="#">Cards</a>
         <a href="#">Workflow</a>
         <a href="#">Notifications</a>

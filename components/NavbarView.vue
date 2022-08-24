@@ -1,15 +1,15 @@
 <template>
     <div class="navbar flex flex-col h-auto w-1/5 space-y-4 mt-4 pr-8 font-bold text-gray-600 text-xs font-inter">
         <div class="flex">
-            <NuxtLink to='/site-list' class="focus flex space-x-4">
-                <img src="../assets/icons/Feed_solidVueDensemble.svg" alt="" class="iconsConfig">
+            <NuxtLink to='/site-list' class="flex space-x-4">
+                <img src="../assets/icons/travel-map.png" alt="" class="iconsConfig">
                 <span>Sites</span>
             </NuxtLink>
         </div>
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-4 ">
             <div class="flex justify-between items-center" id="sites">
-                <NuxtLink to='/country-list' class="flex space-x-4">
-                    <img src="../assets/icons/Basket_solidsite.svg" alt="" class="iconsConfig">
+                <NuxtLink to='/country-list' class="flex space-x-4 hover:bg-white w-full">
+                    <img src="../assets/icons/countries.png" alt="" class="iconsConfig">
                     <span>Pays</span>
                 </NuxtLink>
                 <div class=" hidden bg-red-200 text-red-600 h-5 w-5 rounded-full text-center">
@@ -25,19 +25,19 @@
         </div>
         <div>
             <NuxtLink to='/city-list' class="flex space-x-4">
-                <img  src="../assets/icons/Switch_solidfinances.svg" alt="" class="iconsConfig" />
+                <img  src="../assets/icons/buildings.png" alt="" class="iconsConfig" />
                 <span>villes</span>
             </NuxtLink>
         </div>
         <div>
             <NuxtLink to='/' class="flex space-x-4">
-                <img src="../assets/icons/Switch_solidfinances.svg" alt="" class="iconsConfig" />
+                <img src="../assets/icons/notification.png" alt="" class="iconsConfig" />
                 <span>Notifications</span>
             </NuxtLink>
         </div>
         <div>
             <NuxtLink to='/' class="flex space-x-4">
-                <img src="../assets/icons/Switch_solidfinances.svg" alt="" class="iconsConfig" />
+                <img src="../assets/icons/reserve.png" alt="" class="iconsConfig" />
                 <span>Réservations</span>
             </NuxtLink>
         </div>
@@ -50,14 +50,14 @@
                 <span>24</span>
             </div>
         </div>
-        <div class="space-y-4" id="users">
+        <div class="space-y-4 hidden" id="users">
             <div>
                 <NuxtLink to='/' class="flex space-x-4">
                     <img src="../assets/icons/Customization_solidusers.svg" alt="" class="iconsConfig" />
                     <span>utilisateurs</span>
                 </NuxtLink>
             </div>
-            <div class="ml-7  space-y-4" id="userListe">
+            <div class="ml-7  space-y-4 hidden" id="userListe">
                 <NuxtLink to='/' class="flex space-x-4">
                     <img src="../assets/icons/Vectorguides.svg" alt="" class="iconsConfig" />
                     <span>administrateur</span>
@@ -74,19 +74,19 @@
         </div>
         <div>
             <NuxtLink to='/experience-list' class="flex space-x-4">
-                <img src="../assets/icons/Mail_solidinbox.svg" alt="" class="iconsConfig" />
+                <img src="../assets/icons/experience.png" alt="" class="iconsConfig" />
                 <span>expériences</span>
             </NuxtLink>
         </div>
         <div>
             <NuxtLink to='/activities-list' class="flex space-x-4">
-                <img src="../assets/icons/emoji_solidnotifications.svg" alt="" class="iconsConfig" />
+                <img src="../assets/icons/lifestyle (1).png" alt="" class="iconsConfig" />
                 <span>activité</span>
             </NuxtLink>
         </div>
         <div>
             <NuxtLink to='/category-list' class="flex space-x-4">
-                <img src="../assets/icons/emoji_solidnotifications.svg" alt="" class="iconsConfig" />
+                <img src="../assets/icons/category.png" alt="" class="iconsConfig" />
                 <span>catégorie</span>
             </NuxtLink>
         </div>
